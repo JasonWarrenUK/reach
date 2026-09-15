@@ -14,7 +14,7 @@
 <ol>
 	{#each legs as leg, i (i)}
 		<li>
-			<span class="route-mode" style:color={SEA_MODES.has(leg.m) ? "#9DB8C6" : "#D9A441"}>{PACE[leg.m].label}</span>
+			<span class="route-mode" style:color={SEA_MODES.has(leg.m) ? "var(--reach-sea-leg)" : "var(--reach-ochre)"}>{PACE[leg.m].label}</span>
 			: {NODE_LABEL[leg.from] || leg.from} to {NODE_LABEL[leg.to] || leg.to}, {formatKm(leg.km)}, {formatDays(leg.days - leg.wait)}
 			{#if leg.wait > 0}, after about {leg.wait} days waiting for a ship{/if}
 		</li>

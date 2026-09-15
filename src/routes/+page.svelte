@@ -3,7 +3,7 @@
 	import { SEASONS, PERSONAS, LOADS, TOLERANCES, type SeasonKey, type PersonaKey, type LoadKey, type ToleranceKey } from "$lib/data/travellers";
 	import { makeTraveller } from "$lib/data/travellers";
 	import { SPHERES } from "$lib/data/spheres";
-	import { T, SPHERE_COLOUR } from "$lib/data/palette";
+	import { SPHERE_COLOUR } from "$lib/data/palette";
 	import { COAST_FINE, COAST_COARSE } from "$lib/data/coastlines";
 	import { ZOOMS, PROJECTIONS, W, H, CX, CY, MAX_R, CLIP_R, FAR, type ProjectionKey } from "$lib/geometry/chart-constants";
 	import { layout, ringLabel, niceRings, polar } from "$lib/geometry/layout";
@@ -20,6 +20,7 @@
 	import RouteLines, { type RouteLine } from "$lib/components/RouteLines.svelte";
 	import Reading from "$lib/components/Reading.svelte";
 	import Compare from "$lib/components/Compare.svelte";
+	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
 
 	const initial = readHash() ?? {};
 
@@ -170,6 +171,9 @@
 
 <div class="reach">
 	<header class="masthead">
+		<div class="masthead-eyebrow">
+			<ThemeToggle />
+		</div>
 		<div class="masthead-inner">
 			<h1>Reach</h1>
 			<p class="standfirst">Which is further from Sorrento: Positano, nine kilometres east, or Naples, twenty-six across the water?</p>
@@ -210,8 +214,8 @@
 					aria-label={`Chart of ${level.name} from Surrentum, measured by ${PROJECTIONS[projection].label.toLowerCase()}`}
 				>
 					<defs><clipPath id="chart-clip"><circle cx={CX} cy={CY} r={CLIP_R} /></clipPath></defs>
-					<rect x="0" y="0" width={W} height={H} fill={T.seaDeep} />
-					<circle cx={CX} cy={CY} r={CLIP_R} fill={T.sea} />
+					<rect x="0" y="0" width={W} height={H} fill="var(--reach-sea-deep)" />
+					<circle cx={CX} cy={CY} r={CLIP_R} fill="var(--reach-sea)" />
 
 					<g class="isochrones" clip-path="url(#chart-clip)">
 						{#each bands as b (b.t)}
@@ -288,7 +292,7 @@
 								<circle class="hit" r="18" />
 								{#if flash.has(d.id)}<circle class="pulse" r="10" />{/if}
 								{#if isPin}<circle class="halo" r="14" />{/if}
-								<circle class="dot" r={isHome ? 8 : 6} fill={isHome ? T.homeBright : rampColour(d.days)} />
+								<circle class="dot" r={isHome ? 8 : 6} fill={isHome ? "var(--reach-home-bright)" : rampColour(d.days)} />
 								{#if show && Math.abs(shift) > 6}
 									<line class="leader" x1={flip ? -10 : 10} y1="0" x2={flip ? -10 : 10} y2={shift > 0 ? shift - 4 : shift + 4} />
 								{/if}
@@ -365,12 +369,12 @@
 				{#each SPHERES as sp (sp.n)}
 					<li><span class="swatch" style:background={SPHERE_COLOUR[sp.n]}></span>{sp.n}. {sp.name}</li>
 				{/each}
-				<li><span class="swatch" style:background={T.chartDim}></span>No route</li>
+				<li><span class="swatch" style:background="var(--reach-chart-dim)"></span>No route</li>
 				<li><span class="swatch swatch-land"></span>Land</li>
 				<li><span class="swatch swatch-port"></span>Landing</li>
 				{#if routeLines.length > 0}
-					<li><span class="swatch swatch-line" style:background="#EFE6D4"></span>Route by water</li>
-					<li><span class="swatch swatch-line" style:background="#D9A441"></span>Route by land</li>
+					<li><span class="swatch swatch-line" style:background="var(--reach-bone)"></span>Route by water</li>
+					<li><span class="swatch swatch-line" style:background="var(--reach-ochre)"></span>Route by land</li>
 					{#if anyAlt}<li><span class="swatch swatch-line is-alt"></span>Nearly as quick</li>{/if}
 				{/if}
 			</ul>
@@ -412,7 +416,7 @@
 		{/each}
 		{#if unreachable.length > 0}
 			<article class="sphere">
-				<div class="sphere-band" style:background={T.chartDim}></div>
+				<div class="sphere-band" style:background="var(--reach-chart-dim)"></div>
 				<div class="sphere-body">
 					<h3>No Open Route</h3>
 					<p>No way of getting there, as set.</p>

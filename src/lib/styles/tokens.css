@@ -1,0 +1,68 @@
+/* Emitted by theme-factory from .claude/themes/tuff-html.json.
+   Palette is decided in the theme file; this is a straight copy.
+   Do not hand-edit hex values here — change the theme and re-emit. */
+
+:root {
+	--ink: #272219;
+	--ink-muted: #5D5649;
+	--surface: #EFEAE2;
+	--surface-raised: #E4DCD0;
+	--line: #C6BCAC;
+	--accent: #875F05;
+	--accent-ink: #F9F4EE;
+	--accent-2: #9F2F24;
+	--ok: #3E7339;
+	--warn: #967318;
+	--danger: #AF302B;
+	--info: #2F6997;
+	--gradient: linear-gradient(135deg, #875F05 0%, #964A00 50%, #9F2F24 100%);
+	--font-display: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+	--font-body: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Charter, Georgia, serif;
+	--font-mono: 'Barlow Condensed', 'Avenir Next Condensed', 'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+	--text-base: 16px;
+	--text-ratio: 1.25;
+	--leading: 1.5;
+	--radius-sm: 2px;
+	--radius-md: 4px;
+	--radius-lg: 8px;
+	--shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+	--space: 8px;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--ink: #EFE6D4;
+		--ink-muted: #B8AB93;
+		--surface: #181612;
+		--surface-raised: #26221B;
+		--line: #3E372B;
+		--accent: #D9A441;
+		--accent-ink: #191510;
+		--accent-2: #CA5749;
+		--ok: #78AF72;
+		--warn: #D7B059;
+		--danger: #D4564D;
+		--info: #6F9FC8;
+		--gradient: linear-gradient(135deg, #D9A441 0%, #D87C38 50%, #CA5749 100%);
+	}
+}
+:root[data-theme="dark"] {
+	--ink: #EFE6D4;
+	--ink-muted: #B8AB93;
+	--surface: #181612;
+	--surface-raised: #26221B;
+	--line: #3E372B;
+	--accent: #D9A441;
+	--accent-ink: #191510;
+	--accent-2: #CA5749;
+	--ok: #78AF72;
+	--warn: #D7B059;
+	--danger: #D4564D;
+	--info: #6F9FC8;
+	--gradient: linear-gradient(135deg, #D9A441 0%, #D87C38 50%, #CA5749 100%);
+}
+
+body {
+	background: var(--surface);
+	color: var(--ink);
+	font-family: var(--font-body);
+}

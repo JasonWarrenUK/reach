@@ -1,0 +1,64 @@
+{
+	"$schema": "clod-theme/target@1",
+	"family": "tuff",
+	"target": "html",
+	"extends": "tuff.json",
+	"rationale": {
+		"mapping_notes": "Tokens are the tuff palette copied verbatim per variant, with no re-derivation. --gradient is a 135-degree linear-gradient across the core's three stops for that variant, which run ochre to Roman red on the short hue path. Type tokens carry the artefact's own trio: Instrument Serif for display, Newsreader for body and Barlow Condensed in the mono slot, which is a deliberate substitution because the artefact uses a condensed sans for labels and small caps rather than any monospace face; nothing in the piece sets code. Shape tokens keep small radii (2/4/8 px) because the chart's panels and buttons are close to square in the original and rounder corners would soften a deliberately architectural layout."
+	},
+	"html": {
+		"tokens": {
+			"light": {
+				"--ink": "#272219",
+				"--ink-muted": "#5D5649",
+				"--surface": "#EFEAE2",
+				"--surface-raised": "#E4DCD0",
+				"--line": "#C6BCAC",
+				"--accent": "#875F05",
+				"--accent-ink": "#F9F4EE",
+				"--accent-2": "#9F2F24",
+				"--ok": "#3E7339",
+				"--warn": "#967318",
+				"--danger": "#AF302B",
+				"--info": "#2F6997",
+				"--gradient": "linear-gradient(135deg, #875F05 0%, #964A00 50%, #9F2F24 100%)"
+			},
+			"dark": {
+				"--ink": "#EFE6D4",
+				"--ink-muted": "#B8AB93",
+				"--surface": "#181612",
+				"--surface-raised": "#26221B",
+				"--line": "#3E372B",
+				"--accent": "#D9A441",
+				"--accent-ink": "#191510",
+				"--accent-2": "#CA5749",
+				"--ok": "#78AF72",
+				"--warn": "#D7B059",
+				"--danger": "#D4564D",
+				"--info": "#6F9FC8",
+				"--gradient": "linear-gradient(135deg, #D9A441 0%, #D87C38 50%, #CA5749 100%)"
+			}
+		},
+		"type": {
+			"--font-display": "'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif",
+			"--font-body": "'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Charter, Georgia, serif",
+			"--font-mono": "'Barlow Condensed', 'Avenir Next Condensed', 'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif",
+			"--text-base": "16px",
+			"--text-ratio": "1.25",
+			"--leading": "1.5"
+		},
+		"shape": {
+			"--radius-sm": "2px",
+			"--radius-md": "4px",
+			"--radius-lg": "8px",
+			"--shadow": "0 8px 24px rgba(0, 0, 0, 0.35)",
+			"--space": "8px"
+		},
+		"google_fonts": [
+			"Instrument Serif:ital@0;1",
+			"Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400",
+			"Barlow Condensed:wght@400;500;600"
+		],
+		"theme_switch": "data-theme attribute on :root plus prefers-color-scheme fallback (see artefact-conventions)"
+	}
+}

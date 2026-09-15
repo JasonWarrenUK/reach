@@ -1,17 +1,17 @@
 // Ported from reach-of-surrentum.jsx (lines 1488-1489).
-// Render-layer duplicates of T.ink/ochre; theme step (Step 7) should
-// route these through semantic aliases instead of the raw hexes below.
+// Land routes take the theme's ochre accent, sea routes take the bone ink,
+// via the role aliases in reach.css (SVG stroke accepts var() directly).
 
 import type { Mode } from "./travellers";
 
 export const ROUTE_COLOUR: Record<Mode, string> = {
-	foot: "#D9A441",
-	track: "#D9A441",
-	road: "#D9A441",
-	boat: "#EFE6D4",
-	coast: "#EFE6D4",
-	ship: "#EFE6D4",
-	shipcoast: "#EFE6D4",
+	foot: "var(--reach-ochre)",
+	track: "var(--reach-ochre)",
+	road: "var(--reach-ochre)",
+	boat: "var(--reach-bone)",
+	coast: "var(--reach-bone)",
+	ship: "var(--reach-bone)",
+	shipcoast: "var(--reach-bone)",
 };
 
 export const ROUTE_DASH: Record<Mode, string> = {

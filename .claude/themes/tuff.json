@@ -1,0 +1,262 @@
+{
+	"$schema": "clod-theme/core@1",
+	"family": "tuff",
+	"version": 1,
+	"rationale": {
+		"mood": "Volcanic tuff and lamplight: a Roman shelf town at dusk, where dark warm stone carries bone-white lettering, brass rules and a red that belongs on a painted wall rather than in an interface.",
+		"inspiration": "The Reach of Surrentum artefact's own CSS, whose ochre rules and Roman red frieze were already the approved look; Surrentum sits on a shelf of volcanic tuff, which gives the surfaces their warm near-neutral cast.",
+		"anchor_reason": "Ochre #D9A441 was the artefact's rule and land-route colour, and it survives both surfaces: at lightness 0.75 it glows against a tuff-dark ground, and darkened to 0.515 it clears 4.5:1 on warm parchment without the muddiness a pure yellow would pick up on the way down.",
+		"rule_bent": "The light variant sits at lightness 0.94 rather than the conventional 0.97, so it reads as aged paper rather than white application chrome. This was an explicit constraint: the artefact is dark-first and a bright light mode would misrepresent it.",
+		"rejected": [
+			{
+				"palette": "Sea-anchored: navy #1A2E3D as the anchor, taken from the artefact's chart water.",
+				"why": "The water is the chart's background, not its subject. Anchoring on it would have made the theme cold and pushed the ochre routes into a decorative role, inverting what the piece is actually about."
+			},
+			{
+				"palette": "Roman red #B5382C as the anchor, with ochre demoted to the harmony partner.",
+				"why": "Red at the chroma the frieze needs cannot clear 4.5:1 on a light surface without darkening into maroon, which loses the wall-paint quality that made it worth keeping. It serves better as accent-2, where it carries the frieze and the gradient's far stop."
+			}
+		]
+	},
+	"anchor": {
+		"name": "ochre",
+		"hex": "#D9A441",
+		"oklch": [
+			0.7507,
+			0.1295,
+			79.8
+		]
+	},
+	"palette": {
+		"ink": {
+			"light": "#272219",
+			"dark": "#EFE6D4",
+			"role": "primary text"
+		},
+		"ink-muted": {
+			"light": "#5D5649",
+			"dark": "#B8AB93",
+			"role": "secondary text, captions, meta"
+		},
+		"surface": {
+			"light": "#EFEAE2",
+			"dark": "#181612",
+			"role": "page background"
+		},
+		"surface-raised": {
+			"light": "#E4DCD0",
+			"dark": "#26221B",
+			"role": "cards, panels, code blocks"
+		},
+		"line": {
+			"light": "#C6BCAC",
+			"dark": "#3E372B",
+			"role": "borders, rules, dividers"
+		},
+		"accent": {
+			"light": "#875F05",
+			"dark": "#D9A441",
+			"role": "links, primary actions, highlights"
+		},
+		"accent-ink": {
+			"light": "#F9F4EE",
+			"dark": "#191510",
+			"role": "text placed on accent"
+		},
+		"accent-2": {
+			"light": "#9F2F24",
+			"dark": "#CA5749",
+			"role": "secondary emphasis, gradient partner"
+		},
+		"ok": {
+			"light": "#3E7339",
+			"dark": "#78AF72",
+			"role": "success, done, passing"
+		},
+		"warn": {
+			"light": "#967318",
+			"dark": "#D7B059",
+			"role": "caution, pending, stale"
+		},
+		"danger": {
+			"light": "#AF302B",
+			"dark": "#D4564D",
+			"role": "error, blocked, destructive"
+		},
+		"info": {
+			"light": "#2F6997",
+			"dark": "#6F9FC8",
+			"role": "neutral notice, in progress"
+		}
+	},
+	"gradient": {
+		"light": [
+			"#875F05",
+			"#964A00",
+			"#9F2F24"
+		],
+		"dark": [
+			"#D9A441",
+			"#D87C38",
+			"#CA5749"
+		]
+	},
+	"typography": {
+		"display": {
+			"family": "Instrument Serif",
+			"fallback": "'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif",
+			"weight": 400
+		},
+		"body": {
+			"family": "Newsreader",
+			"fallback": "'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Charter, Georgia, serif",
+			"weight": 400
+		},
+		"mono": {
+			"family": "Barlow Condensed",
+			"fallback": "'Avenir Next Condensed', 'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif",
+			"weight": 500
+		},
+		"scale": {
+			"base_px": 16,
+			"ratio": 1.25,
+			"line_height": 1.5
+		}
+	},
+	"shape": {
+		"radius_px": {
+			"sm": 2,
+			"md": 4,
+			"lg": 8
+		},
+		"shadow": {
+			"blur_px": 24,
+			"offset_y_px": 8,
+			"opacity": 0.35
+		},
+		"space_px": {
+			"unit": 8
+		}
+	},
+	"contrast": {
+		"light": [
+			{
+				"fg": "ink",
+				"bg": "surface",
+				"level": "AA",
+				"ratio": 13.19
+			},
+			{
+				"fg": "ink",
+				"bg": "surface-raised",
+				"level": "AA",
+				"ratio": 11.62
+			},
+			{
+				"fg": "ink-muted",
+				"bg": "surface",
+				"level": "AA",
+				"ratio": 6.06
+			},
+			{
+				"fg": "accent",
+				"bg": "surface",
+				"level": "AA",
+				"ratio": 4.78
+			},
+			{
+				"fg": "accent-ink",
+				"bg": "accent",
+				"level": "AA",
+				"ratio": 5.23
+			},
+			{
+				"fg": "ok",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 4.72
+			},
+			{
+				"fg": "warn",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 3.68
+			},
+			{
+				"fg": "danger",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 5.35
+			},
+			{
+				"fg": "info",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 4.89
+			}
+		],
+		"dark": [
+			{
+				"fg": "ink",
+				"bg": "surface",
+				"level": "AA",
+				"ratio": 14.57
+			},
+			{
+				"fg": "ink",
+				"bg": "surface-raised",
+				"level": "AA",
+				"ratio": 12.76
+			},
+			{
+				"fg": "ink-muted",
+				"bg": "surface",
+				"level": "AA",
+				"ratio": 7.99
+			},
+			{
+				"fg": "accent",
+				"bg": "surface",
+				"level": "AA",
+				"ratio": 8.03
+			},
+			{
+				"fg": "accent-ink",
+				"bg": "accent",
+				"level": "AA",
+				"ratio": 8.08
+			},
+			{
+				"fg": "ok",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 7.03
+			},
+			{
+				"fg": "warn",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 8.81
+			},
+			{
+				"fg": "danger",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 4.51
+			},
+			{
+				"fg": "info",
+				"bg": "surface",
+				"level": "AA-large",
+				"ratio": 6.43
+			}
+		]
+	},
+	"provenance": {
+		"seed": "src/lib/styles/reach.css from the Reach of Surrentum artefact: its ochre rule colour, Roman red frieze, tuff-dark grounds and bone ink, plus its Instrument Serif / Newsreader / Barlow Condensed typography.",
+		"derived_from": null,
+		"created": "2026-09-15",
+		"updated": "2026-09-15",
+		"tool": "theme-factory@1"
+	}
+}
