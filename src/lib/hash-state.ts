@@ -24,7 +24,7 @@ export function readHash(): HashState | null {
 		if (!h) return null;
 		const q = new URLSearchParams(h);
 		return {
-			zoom: q.has("z") ? Math.max(0, Math.min(5, Number(q.get("z")))) : undefined,
+			zoom: q.has("z") && Number.isFinite(Number(q.get("z"))) ? Math.max(0, Math.min(5, Number(q.get("z")))) : undefined,
 			projection: q.get("p") === "time" ? "time" : q.has("p") ? "distance" : undefined,
 			season: (SEASONS as Record<string, unknown>)[q.get("s") ?? ""] ? (q.get("s") as SeasonKey) : undefined,
 			who: (PERSONAS as Record<string, unknown>)[q.get("w") ?? ""] ? (q.get("w") as PersonaKey) : undefined,

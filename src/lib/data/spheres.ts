@@ -1,6 +1,6 @@
 // Ported from reach-of-surrentum.jsx (lines 817-842).
 
-import { T, SPHERE_COLOUR, SPHERE_COLOUR_END } from "./palette";
+import { SPHERE_COLOUR, SPHERE_COLOUR_END } from "./palette";
 
 export interface Sphere {
 	n: number;
@@ -34,7 +34,7 @@ function rgbToHex(c: number[]): string {
 
 /** Dot colour runs continuously through the bracket colours, so the chart never implies a cliff at a bracket edge. */
 export function rampColour(days: number | null): string {
-	if (days === null) return T.chartDim;
+	if (days === null) return "var(--reach-chart-dim)";
 	const s = sphereOf(days) as number;
 	const lo = s === 0 ? 0 : SPHERES[s - 1].max;
 	const hi = s === 5 ? 21 : SPHERES[s].max;

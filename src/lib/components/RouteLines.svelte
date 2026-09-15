@@ -67,7 +67,7 @@
 </script>
 
 <g class="routes" clip-path="url(#chart-clip)">
-	{#each routes as r, i (r.key)}
+	{#each routes as r, i (`${routes.length}-${i}`)}
 		<polyline
 			bind:this={polylines[i]}
 			class="route-line"

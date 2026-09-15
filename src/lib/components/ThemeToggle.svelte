@@ -31,7 +31,15 @@
 		else root.setAttribute("data-theme", mode);
 	}
 
-	let mode: Mode = $state(read());
+	// Starts at "system" to match SSR (localStorage doesn't exist there);
+	// corrected on mount so aria-pressed reflects the real stored choice
+	// without touching document.documentElement before app.html's pre-paint
+	// script has already set it.
+	let mode: Mode = $state("system");
+
+	$effect(() => {
+		mode = read();
+	});
 
 	function set(next: Mode): void {
 		mode = next;
