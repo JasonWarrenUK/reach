@@ -1,0 +1,136 @@
+[
+	{
+		"name": "PHASE_1",
+		"path": "docs/roadmaps/PHASE_1.md",
+		"project": "Reach",
+		"archived": false,
+		"externalGates": [],
+		"milestones": [
+			{
+				"id": "M1",
+				"name": "Deploy Infrastructure",
+				"goal": "Every later task can ship the moment it's done, not batch at the end.",
+				"tasks": [
+					{
+						"id": "1DP.1",
+						"description": "Create a public GitHub repository under JasonWarrenUK and push the existing local history",
+						"status": "todo",
+						"dependsOn": []
+					},
+					{
+						"id": "1DP.2",
+						"description": "Link the project to Vercel and confirm a production deploy from main",
+						"status": "blocked",
+						"dependsOn": [
+							"1DP.1"
+						],
+						"softDependsOn": [
+							"2MD.4",
+							"2MD.7",
+							"3EX.2"
+						]
+					}
+				]
+			},
+			{
+				"id": "M2",
+				"name": "Model & Narrative",
+				"goal": "The routing model gains legible depth, and journeys narrate themselves in prose that degrades gracefully from hand-written to generated.",
+				"tasks": [
+					{
+						"id": "2MD.1",
+						"description": "Design spike: persona roster for narrative authoring (which personas ship, whether the existing villa/fisher/tenant set is right or changes)",
+						"status": "todo",
+						"dependsOn": [],
+						"notes": "Output is a written recommendation for approval: keep, extend or revise the current three-persona roster (villa household, fishing family, tenant farmer) specifically for narrative-authoring purposes. Hard constraint carried forward into every downstream task: the tool must never ship in a state where only one persona has narrative content, since single-persona coverage defeats the comparison feature's purpose. This spike's roster is binding on 2MD.5 onward."
+					},
+					{
+						"id": "2MD.2",
+						"description": "Design spike: narrative fragment data model and specificity-ladder selection algorithm",
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.1"
+						],
+						"notes": "Decides the fragment schema across the authored-to-generated continuum (exact persona+season+vehicle+location, down through interstitial combinations, to deterministic stitched generic prose), the tie-break rule when two fragments are equally specific along different dimensions, and whether leg-level drill-down is a separate reading surface or an inline expand/collapse of the whole-journey text."
+					},
+					{
+						"id": "2MD.3",
+						"description": "Build the narrative fragment store and specificity-ladder selector",
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.2"
+						]
+					},
+					{
+						"id": "2MD.4",
+						"description": "Implement whole-journey narration with leg-level drill-down per the spike's chosen UI model",
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.2",
+							"2MD.3"
+						]
+					},
+					{
+						"id": "2MD.5",
+						"description": "Author narrative fragments for every persona in the confirmed roster, to at least the deterministic-stitched floor",
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.1",
+							"2MD.2",
+							"2MD.3"
+						],
+						"notes": "The floor obligation, not a stretch goal. Every persona in the 2MD.1 roster needs at minimum the deterministic-stitched-generic tier working before this counts done; hand-authored exact-match fragments for any given persona are additive on top, never a substitute for another persona having nothing."
+					},
+					{
+						"id": "2MD.6",
+						"description": "Design spike: comparison surface for two full models (overlay, delta readout or difference-as-projection)",
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.1",
+							"2MD.3",
+							"2MD.5"
+						],
+						"notes": "Output is a written recommendation for approval. Candidates: a ghost chart overlaying two coastline-clipped isochrone sets; a delta readout (\"the tenant reaches 11 fewer places; Rome moves from sphere 4 to sphere 5\"); or the difference itself as the chart's projection. Blocked on the persona roster and full-coverage floor because comparing two models is meaningless if either side has no narrative content."
+					},
+					{
+						"id": "2MD.7",
+						"description": "Implement the chosen two-model comparison surface",
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.6"
+						]
+					}
+				]
+			},
+			{
+				"id": "M3",
+				"name": "Exploration & Close",
+				"goal": "Test whether the model can honestly support continuous time, then close the phase with the concept write-up.",
+				"tasks": [
+					{
+						"id": "3EX.1",
+						"description": "Research spike: feasibility of translating the seasonal model into a continuous year control",
+						"status": "todo",
+						"dependsOn": [],
+						"notes": "SEASONS[season].forbid is a discrete closed-mode list and returnFactorAt has no time term; true continuity needs either dated closures and a seasonal wind curve, or an honest admission that a stepped control snapped to real Roman calendar moments (sailing season opening, harvest, mare clausum) is the defensible option. A recommendation against full continuity, in favour of the stepped version, is an acceptable spike outcome. Output: a written recommendation for approval."
+					},
+					{
+						"id": "3EX.2",
+						"description": "Implement the year/time control per the spike's recommendation",
+						"status": "blocked",
+						"dependsOn": [
+							"3EX.1"
+						]
+					},
+					{
+						"id": "3EX.3",
+						"description": "Write the concept and process write-up (the historical argument and the build story, one document)",
+						"status": "todo",
+						"dependsOn": [],
+						"notes": "Close to final in the phase, not gating anything; covers both what the toy is arguing about antiquity and what building it involved, combining devlog and concept framing in one document."
+					}
+				]
+			}
+		]
+	}
+]
