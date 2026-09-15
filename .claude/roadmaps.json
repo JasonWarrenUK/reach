@@ -14,13 +14,13 @@
 					{
 						"id": "1DP.1",
 						"description": "Create a public GitHub repository under JasonWarrenUK and push the existing local history",
-						"status": "todo",
+						"status": "done",
 						"dependsOn": []
 					},
 					{
 						"id": "1DP.2",
 						"description": "Link the project to Vercel and confirm a production deploy from main",
-						"status": "blocked",
+						"status": "todo",
 						"dependsOn": [
 							"1DP.1"
 						],
