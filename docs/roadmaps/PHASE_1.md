@@ -11,7 +11,7 @@ The Svelte 5 / SvelteKit 2 port of `reach-of-surrentum.jsx` is complete, tested 
 **Goal:** every later task can ship the moment it's done, not batch at the end.
 
 - [x] **1DP.1**: Create a public GitHub repository under JasonWarrenUK and push the existing local history
-- [ ] **1DP.2**: Link the project to Vercel and confirm a production deploy from main
+- [x] **1DP.2**: Link the project to Vercel and confirm a production deploy from main
 
 ---
 
@@ -93,7 +93,7 @@ graph LR
 	3EX.2 --> M3
 	1DP.2 --> M1
 	3EX.3 --> M3
-	class 1DP.2,2MD.1,3EX.1,3EX.3 todo
+	class 2MD.1,3EX.1,3EX.3 todo
 	class 2MD.2,2MD.3,2MD.4,2MD.5,2MD.6,2MD.7,3EX.2 blocked
-	class 1DP.1 done
+	class 1DP.1,1DP.2 done
 ```

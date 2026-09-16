@@ -20,7 +20,7 @@
 					{
 						"id": "1DP.2",
 						"description": "Link the project to Vercel and confirm a production deploy from main",
-						"status": "todo",
+						"status": "done",
 						"dependsOn": [
 							"1DP.1"
 						],
