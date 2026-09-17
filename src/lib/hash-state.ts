@@ -3,14 +3,15 @@
 
 import { replaceState } from "$app/navigation";
 import { PLACES } from "./data/places";
-import { SEASONS, PERSONAS, LOADS, TOLERANCES, type SeasonKey, type PersonaKey, type LoadKey, type ToleranceKey } from "./data/travellers";
+import { PERSONAS, LOADS, TOLERANCES, type PersonaKey, type LoadKey, type ToleranceKey } from "./data/travellers";
+import { SEGMENTS, type SegmentKey } from "./data/year";
 import type { ProjectionKey } from "./geometry/chart-constants";
 import type { Direction } from "./routing/dijkstra";
 
 export interface HashState {
 	zoom?: number;
 	projection?: ProjectionKey;
-	season?: SeasonKey;
+	segment?: SegmentKey;
 	who?: PersonaKey;
 	load?: LoadKey;
 	tolerance?: ToleranceKey;
@@ -18,15 +19,24 @@ export interface HashState {
 	pins?: string[];
 }
 
-export function readHash(): HashState | null {
+/** The legacy `s` value, read before segments existed. Read-side only: writeHash never emits it. */
+const LEGACY_SEASON_ALIASES: Record<string, SegmentKey> = { shoulder: "spring" };
+
+function readSegment(raw: string | null): SegmentKey | undefined {
+	if (raw === null) return undefined;
+	if ((SEGMENTS as Record<string, unknown>)[raw]) return raw as SegmentKey;
+	return LEGACY_SEASON_ALIASES[raw];
+}
+
+/** Pure parse of the hash fragment (no leading "#"), split out so it is testable without `window`. */
+export function parseHash(h: string): HashState | null {
+	if (!h) return null;
 	try {
-		const h = (typeof window !== "undefined" && window.location.hash.slice(1)) || "";
-		if (!h) return null;
 		const q = new URLSearchParams(h);
 		return {
 			zoom: q.has("z") && Number.isFinite(Number(q.get("z"))) ? Math.max(0, Math.min(5, Number(q.get("z")))) : undefined,
 			projection: q.get("p") === "time" ? "time" : q.has("p") ? "distance" : undefined,
-			season: (SEASONS as Record<string, unknown>)[q.get("s") ?? ""] ? (q.get("s") as SeasonKey) : undefined,
+			segment: readSegment(q.get("s")),
 			who: (PERSONAS as Record<string, unknown>)[q.get("w") ?? ""] ? (q.get("w") as PersonaKey) : undefined,
 			load: (LOADS as Record<string, unknown>)[q.get("l") ?? ""] ? (q.get("l") as LoadKey) : undefined,
 			tolerance: (TOLERANCES as Record<string, unknown>)[q.get("t") ?? ""] ? (q.get("t") as ToleranceKey) : undefined,
@@ -38,10 +48,19 @@ export function readHash(): HashState | null {
 	}
 }
 
+export function readHash(): HashState | null {
+	try {
+		const h = (typeof window !== "undefined" && window.location.hash.slice(1)) || "";
+		return parseHash(h);
+	} catch {
+		return null;
+	}
+}
+
 export interface WriteableHashState {
 	zoom: number;
 	projection: ProjectionKey;
-	season: SeasonKey;
+	segment: SegmentKey;
 	who: PersonaKey;
 	load: LoadKey;
 	tolerance: ToleranceKey;
@@ -54,7 +73,7 @@ export function writeHash(state: WriteableHashState): string | null {
 		const q = new URLSearchParams();
 		q.set("z", String(state.zoom));
 		q.set("p", state.projection);
-		q.set("s", state.season);
+		q.set("s", state.segment);
 		q.set("w", state.who);
 		q.set("l", state.load);
 		q.set("t", state.tolerance);

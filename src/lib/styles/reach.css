@@ -127,6 +127,28 @@
 .choice-btn:focus-visible, .chip:focus-visible, .chart-btn:focus-visible, .unpin:focus-visible { outline: 2px solid var(--reach-ochre); outline-offset: 2px; }
 .choice-btn:focus-visible { outline-color: var(--reach-on-dark); }
 
+/* The year band: a stepped control whose segments are proportional to their
+   real day count (flex-grow, set inline per segment), not a button grid.
+   .yearband-current only shows above 600px, where a narrow segment (autumn,
+   58/365) can be too tight to hold its own label; below 600px the band
+   drops to one full-width row per segment instead, so this line is redundant
+   there and hidden. */
+.yearband-row { display: flex; align-items: stretch; gap: 2px; }
+.yearband-btn {
+	display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem;
+	flex-shrink: 1; flex-basis: 0; min-width: 0; overflow: hidden;
+	font-family: var(--reach-sans); background: transparent; color: var(--reach-on-dark);
+	border: 1px solid color-mix(in srgb, var(--reach-on-dark) 45%, transparent); border-radius: 0;
+	padding: 0.4rem 0.4rem; cursor: pointer; min-height: 40px;
+}
+.yearband-btn:hover { border-color: var(--reach-on-dark); }
+.yearband-btn.is-on { background: var(--reach-on-dark); color: var(--reach-red-deep); border-color: var(--reach-on-dark); }
+.yearband-btn:focus-visible { outline: 2px solid var(--reach-ochre); outline-offset: 2px; outline-color: var(--reach-on-dark); }
+.yearband-label { font-size: 1.02rem; font-weight: 500; letter-spacing: 0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.yearband-dates { font-size: 0.78rem; letter-spacing: 0.01em; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.yearband-current { margin: 0.5rem 0 0; font-family: var(--reach-sans); font-size: 0.9rem; color: var(--reach-frieze-ink); }
+.yearband-current strong { color: var(--reach-on-dark); }
+
 /* What each option means, inside the group's info modal (Modal.svelte supplies the shell). */
 .choice-info-lead { margin: 0.9rem 0 0; font-size: 1rem; line-height: 1.5; color: var(--reach-ink-soft); }
 .choice-info dl { margin: 0.6rem 0 0; }
@@ -292,6 +314,8 @@
 	.standfirst { font-size: 1.3rem; }
 	.controls { --controls-gap: 1rem; gap: 0.9rem var(--controls-gap); padding: 1rem; }
 	.choice-btn { font-size: 0.95rem; padding: 0.4rem 0.6rem; }
+	.yearband-label { font-size: 0.92rem; }
+	.yearband-dates { display: none; }
 	.stage { grid-template-columns: 1fr; grid-template-areas: "chart" "panel" "notes"; gap: 1rem; padding: 0 1rem; margin-top: 1.25rem; }
 	.chart-fig { margin: 0 -1rem; }
 	.chart { border-left: 0; border-right: 0; }
@@ -312,6 +336,13 @@
 }
 @media (max-width: 600px) {
 	.choice { flex-basis: 100%; }
+	/* The proportional band can't hold a label at phone width (autumn's
+	   58/365 share is too narrow to read); drop to one full-width row per
+	   segment instead, each showing its own dates. */
+	.yearband-row { flex-direction: column; gap: 4px; }
+	.yearband-btn { flex-grow: 0 !important; flex-direction: row; justify-content: space-between; padding: 0.5rem 0.8rem; }
+	.yearband-dates { display: inline; }
+	.yearband-current { display: none; }
 }
 
 /* ---- wide desktop: spend the width ----
@@ -327,6 +358,10 @@
 	.masthead h1 { margin-bottom: 0; }
 	.standfirst { max-width: 40rem; padding-bottom: 0.35rem; }
 	.choice { flex: 1 1 0; }
+	/* At this width .choice's equal four-way split leaves autumn (58/365 of
+	   the band) too narrow for its label; give the band two shares instead
+	   of one so every segment keeps room to read. */
+	.choice.yearband { flex: 2 1 0; }
 	.stage {
 		grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.7fr);
 		grid-template-areas: "chart panel notes";
