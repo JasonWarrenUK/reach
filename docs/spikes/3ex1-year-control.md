@@ -94,6 +94,8 @@ graph LR
 
 `SeasonKey` stays three-valued. The literal comparisons at `projection.ts:116`, `+page.svelte:355`, `+page.svelte:361` and `Reading.svelte:37-39` survive untouched, as do the existing routing tests. The segment is a presentation layer that maps four keys onto three.
 
+The copy splits the same way. `+page.svelte:199` and `+page.svelte:391` print `SEASONS[season].label` and `.blurb`; in 3EX.2 they print the segment's label and blurb, so a reader in the autumn shoulder never sees "Shoulder months". The sentences behind the literal comparisons ("No ship puts to sea and there is no other way") are true of either shoulder and stay as they are.
+
 ### Control
 
 A `YearBand` component replaces the "Time of year" `Choice`. Four buttons in a row, each with `flex-grow` set to its day count, `aria-pressed` as `Choice` does it, arrow keys stepping between segments and wrapping. The band starts at 10 March so that winter is one block and the year opens where Vegetius' navigation year opens.
@@ -101,6 +103,8 @@ A `YearBand` component replaces the "Time of year" `Choice`. Four buttons in a r
 ### Hash state
 
 The `s` parameter currently holds `sailing`, `shoulder` or `winter`. It moves to `spring`, `sailing`, `autumn`, `winter`, with `shoulder` still accepted on read and treated as `spring`. Every link shared so far keeps working.
+
+This needs a change to `readHash`. `src/lib/hash-state.ts:29` validates `s` by looking it up in `SEASONS`, which is keyed by `SeasonKey`; left alone, `s=spring` and `s=autumn` fail the lookup, come back `undefined` and drop the reader into the sailing season at `+page.svelte:29`. So `readHash` validates `s` against the segment table, and `HashState` and `WriteableHashState` carry the segment key where they now carry `SeasonKey`. The page holds the segment as its state and derives `SeasonKey` from it through the mapping. The wider vocabulary stays in the presentation layer and `SeasonKey` stays three-valued.
 
 ### Spring against autumn
 
@@ -111,6 +115,7 @@ The two shoulders produce identical model output in 3EX.2. The Etesians blow fro
 - **A time term on `returnFactorAt`.** Under the current closures its only effect would fall on coaster returns from Ostia and Roma in the shoulder months. The repo has no month-by-month wind source for the Tyrrhenian.
 - **Harvest and vintage marks.** The model has no land-side seasonal term, so these would be annotation only. Each needs a dated source. The rustic calendars (*Menologia Rustica*) are the obvious place to look; I haven't checked them. This belongs with the narrative work.
 - **Day-level scrubbing**, for the reasons above.
+- **Spring and autumn wording in the chart notes and the reading panel.** `+page.svelte:355`, `+page.svelte:361` and `Reading.svelte:37-39` keep their three-way copy. Telling the two shoulders apart in prose belongs with the narrative work, keyed as the 2MD.2 note below describes.
 
 ## Knock-on for 2MD.2
 
@@ -131,7 +136,7 @@ The fragment schema keys on season. Under this layering, fragments key on `Seaso
 
 ## Effort for 3EX.2
 
-Roughly half a day, by my estimate: the segment data and mapping (about 30 lines), the `YearBand` component (about 60), the hash-state alias (about 10) and tests for the segment-to-season mapping and the legacy `shoulder` link.
+Roughly half a day, by my estimate: the segment data and mapping (about 30 lines), the `YearBand` component (about 60), the hash-state work (about 20: `readHash` validating against the segment table, the two interfaces carrying the segment key, the legacy `shoulder` alias), the page deriving `SeasonKey` from the segment (about 10) and tests for the segment-to-season mapping, the legacy `shoulder` link and a round trip of `s=spring` and `s=autumn` through `readHash`.
 
 ## Decisions
 
