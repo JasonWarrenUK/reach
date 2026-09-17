@@ -1,17 +1,18 @@
 // Ported from reach-of-surrentum.jsx (lines 1488-1489).
-// Land routes take the theme's ochre accent, sea routes take the bone ink,
-// via the role aliases in reach.css (SVG stroke accepts var() directly).
+// Land routes take the chart's ochre, sea routes take its bone lettering,
+// via the fixed chart aliases in reach.css (the chart stays dark in both
+// variants; SVG stroke accepts var() directly).
 
 import type { Mode } from "./travellers";
 
 export const ROUTE_COLOUR: Record<Mode, string> = {
-	foot: "var(--reach-ochre)",
-	track: "var(--reach-ochre)",
-	road: "var(--reach-ochre)",
-	boat: "var(--reach-bone)",
-	coast: "var(--reach-bone)",
-	ship: "var(--reach-bone)",
-	shipcoast: "var(--reach-bone)",
+	foot: "var(--reach-chart-ochre)",
+	track: "var(--reach-chart-ochre)",
+	road: "var(--reach-chart-ochre)",
+	boat: "var(--reach-on-dark)",
+	coast: "var(--reach-on-dark)",
+	ship: "var(--reach-on-dark)",
+	shipcoast: "var(--reach-on-dark)",
 };
 
 export const ROUTE_DASH: Record<Mode, string> = {

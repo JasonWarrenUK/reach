@@ -26,6 +26,13 @@
    remaining stray hexes named in the inventory: land fill, the "is-home"
    node's red, and the closed-route flag background).
 
+   The chart, the frieze, selected chips and buttons and the shut flag stay
+   dark or red in both variants, so lettering and marks on them cannot read
+   --reach-bone (which follows --ink and turns dark on parchment).
+   --reach-on-dark is the artefact's literal bone (palette.ts chartLabel) and
+   --reach-chart-ochre its literal ochre (the theme's anchor); both hold
+   still while the theme flips around them.
+
    Alpha-modulated colours (rgba(bone, x), rgba(rule, x) etc in the original)
    are expressed with color-mix() against the aliases below instead of
    frozen hex+alpha pairs, so they keep tracking the theme in both variants. */
@@ -53,7 +60,9 @@
 	--reach-flag-shut: #2B2622;
 	--reach-coast-stroke: #E9D3A3;
 	--reach-sea-leg: #9DB8C6;
-	--reach-frieze-ink: color-mix(in srgb, var(--reach-bone) 80%, var(--reach-red) 20%);
+	--reach-on-dark: #EFE6D4;
+	--reach-chart-ochre: #D9A441;
+	--reach-frieze-ink: color-mix(in srgb, var(--reach-on-dark) 92%, var(--reach-red) 8%);
 	--reach-flag-bg: color-mix(in srgb, var(--reach-red-deep) 55%, var(--reach-ground));
 	--reach-route-bg: color-mix(in srgb, var(--reach-ground) 85%, var(--reach-rule));
 
@@ -63,7 +72,7 @@
 	background-image: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--reach-red) 10%, transparent), transparent 55%);
 }
 .reach * { box-sizing: border-box; }
-.reach ::selection { background: var(--reach-red); color: var(--reach-bone); }
+.reach ::selection { background: var(--reach-red); color: var(--reach-on-dark); }
 
 /* ---- masthead: the title as an inscription, the question as the panel ---- */
 .masthead { max-width: 62rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
@@ -93,14 +102,15 @@
 .choice-row { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 .choice-btn {
 	font-family: var(--reach-sans); font-size: 1.02rem; font-weight: 500; letter-spacing: 0.01em;
-	background: transparent; color: var(--reach-bone); border: 1px solid color-mix(in srgb, var(--reach-bone) 45%, transparent); border-radius: 0;
+	background: transparent; color: var(--reach-on-dark); border: 1px solid color-mix(in srgb, var(--reach-on-dark) 45%, transparent); border-radius: 0;
 	padding: 0.4rem 0.8rem; cursor: pointer; min-height: 40px;
 }
-.choice-btn:hover { border-color: var(--reach-bone); }
-.choice-btn.is-on { background: var(--reach-bone); color: var(--reach-red-deep); border-color: var(--reach-bone); }
+.choice-btn:hover { border-color: var(--reach-on-dark); }
+.choice-btn.is-on { background: var(--reach-on-dark); color: var(--reach-red-deep); border-color: var(--reach-on-dark); }
 .choice-btn:focus-visible, .chip:focus-visible, .chart-btn:focus-visible, .unpin:focus-visible { outline: 2px solid var(--reach-ochre); outline-offset: 2px; }
+.choice-btn:focus-visible { outline-color: var(--reach-on-dark); }
 .persona-blurb { flex-basis: 100%; margin: 0.15rem 0 0; font-family: var(--reach-serif); font-size: 1rem; color: var(--reach-frieze-ink); max-width: 52rem; }
-.persona-blurb strong { color: var(--reach-bone); font-weight: 500; }
+.persona-blurb strong { color: var(--reach-on-dark); font-weight: 500; }
 
 /* ---- stage ---- */
 .stage {
@@ -121,19 +131,19 @@
 .node { cursor: pointer; transition: transform 900ms cubic-bezier(.4,0,.2,1); }
 .node .hit { fill: transparent; }
 .node .dot { stroke: var(--reach-sea-deep); stroke-width: 1.5; }
-.node .label { font-family: var(--reach-sans); font-size: 15px; font-weight: 500; fill: var(--reach-bone); paint-order: stroke; stroke: var(--reach-sea-deep); stroke-width: 3.5px; }
+.node .label { font-family: var(--reach-sans); font-size: 15px; font-weight: 500; fill: var(--reach-on-dark); paint-order: stroke; stroke: var(--reach-sea-deep); stroke-width: 3.5px; }
 .node.is-home .label { font-weight: 600; fill: var(--reach-home-bright); }
-.node.is-home .dot { stroke: var(--reach-bone); stroke-width: 2; }
+.node.is-home .dot { stroke: var(--reach-on-dark); stroke-width: 2; }
 .node.is-home { cursor: default; }
 .node.is-off { opacity: 0.4; }
 .node.is-sel .label { font-weight: 600; }
-.node .halo { fill: none; stroke: var(--reach-bone); stroke-width: 1.5; }
+.node .halo { fill: none; stroke: var(--reach-on-dark); stroke-width: 1.5; }
 .node:hover .label { text-decoration: underline; }
 .node:focus-visible { outline: none; }
-.node:focus-visible .halo, .node:focus-visible .dot { stroke: var(--reach-ochre); stroke-width: 2.5; }
+.node:focus-visible .halo, .node:focus-visible .dot { stroke: var(--reach-chart-ochre); stroke-width: 2.5; }
 .node .leader { stroke: var(--reach-chart-dim); stroke-width: 1; }
-.compare-ring { fill: none; stroke: var(--reach-ochre); stroke-width: 1.5; stroke-dasharray: 3 5; opacity: 0.95; transition: r 900ms cubic-bezier(.4,0,.2,1); }
-.compare-ring.is-first { stroke: var(--reach-bone); }
+.compare-ring { fill: none; stroke: var(--reach-chart-ochre); stroke-width: 1.5; stroke-dasharray: 3 5; opacity: 0.95; transition: r 900ms cubic-bezier(.4,0,.2,1); }
+.compare-ring.is-first { stroke: var(--reach-on-dark); }
 .route-line { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.95; }
 .route-line.is-alt { opacity: 0.45; stroke-width: 1.6; }
 
@@ -145,7 +155,7 @@
 .chart-zoom { bottom: 10px; left: 10px; }
 .chart-btn { font-family: var(--reach-sans); font-size: 0.98rem; font-weight: 500; background: transparent; color: var(--reach-bone); border: 0; padding: 0.4rem 0.75rem; min-height: 36px; cursor: pointer; }
 .chart-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--reach-bone) 8%, transparent); }
-.chart-btn.is-on { background: var(--reach-red); color: var(--reach-bone); }
+.chart-btn.is-on { background: var(--reach-red); color: var(--reach-on-dark); }
 .chart-btn:disabled { opacity: 0.35; cursor: default; }
 .chart-level { font-family: var(--reach-sans); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--reach-ochre); padding: 0 0.6rem; min-width: 8rem; text-align: center; }
 
@@ -155,7 +165,7 @@
 .legend li { display: flex; align-items: center; gap: 0.4rem; }
 .swatch { width: 11px; height: 11px; border-radius: 50%; display: inline-block; outline: 1px solid var(--reach-chart-rule); }
 .swatch-land { background: var(--reach-land); border-radius: 1px; outline-color: color-mix(in srgb, var(--reach-coast-stroke) 60%, transparent); }
-.swatch-line { width: 18px; height: 3px; border-radius: 0; outline: none; }
+.swatch-line { width: 18px; height: 3px; border-radius: 0; outline: none; margin: 0 3px; box-shadow: 0 0 0 3px var(--reach-sea-deep); }
 .swatch-line.is-alt { background: var(--reach-chart-dim); opacity: 0.7; }
 .tally { font-family: var(--reach-sans); font-size: 0.9rem; letter-spacing: 0.02em; color: var(--reach-ink-soft); margin: 0.6rem 0 0; }
 
@@ -174,7 +184,7 @@
 .reading-source { margin: 0.9rem 0 0; font-family: var(--reach-sans); font-size: 0.9rem; color: var(--reach-ink-soft); }
 .reading-source span { font-weight: 600; color: var(--reach-ochre); letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.8rem; margin-right: 0.3rem; }
 .flag { font-size: 0.95rem; margin: 0 0 0.9rem; padding: 0.6rem 0.8rem; border-left: 3px solid var(--reach-red); background: var(--reach-flag-bg); color: var(--reach-bone); }
-.flag-shut { border-color: var(--reach-ink-soft); background: var(--reach-flag-shut); }
+.flag-shut { border-color: var(--reach-ink-soft); background: var(--reach-flag-shut); color: var(--reach-on-dark); }
 
 .route { margin: 0 0 1.1rem; padding: 0.8rem 0.95rem; background: var(--reach-route-bg); border: 1px solid color-mix(in srgb, var(--reach-rule) 35%, transparent); }
 .route-title { font-family: var(--reach-sans); font-size: 0.8rem; font-weight: 600; color: var(--reach-ochre); margin: 0 0 0.35rem; text-transform: uppercase; letter-spacing: 0.12em; }
@@ -207,7 +217,7 @@
 .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; margin: 0; }
 .chip { font-family: var(--reach-sans); font-size: 0.98rem; background: transparent; border: 1px solid color-mix(in srgb, var(--reach-bone) 35%, transparent); padding: 0.32rem 0.65rem; cursor: pointer; color: var(--reach-bone); min-height: 36px; }
 .chip:hover { border-color: var(--reach-bone); }
-.chip.is-on { background: var(--reach-red); border-color: var(--reach-red); color: var(--reach-bone); }
+.chip.is-on { background: var(--reach-red); border-color: var(--reach-red); color: var(--reach-on-dark); }
 .chip-days { margin-left: 0.5rem; opacity: 0.7; font-size: 0.85rem; }
 .chip-empty { font-family: var(--reach-sans); font-size: 0.95rem; color: var(--reach-ink-soft); font-style: italic; }
 
@@ -217,19 +227,19 @@
 .colophon p { font-family: var(--reach-sans); font-size: 0.95rem; letter-spacing: 0.01em; color: var(--reach-ink-soft); margin: 0; }
 
 
-.iso { fill: var(--reach-bone); opacity: 0.045; }
-.port line { stroke: color-mix(in srgb, var(--reach-bone) 55%, transparent); stroke-width: 1; stroke-dasharray: 2 3; }
-.port rect { fill: var(--reach-sea-deep); stroke: var(--reach-bone); stroke-width: 1.4; }
-.swatch-port { width: 9px; height: 9px; border-radius: 0; transform: rotate(45deg); background: var(--reach-sea-deep); outline: 1.4px solid var(--reach-bone); }
+.iso { fill: var(--reach-on-dark); opacity: 0.045; }
+.port line { stroke: color-mix(in srgb, var(--reach-on-dark) 55%, transparent); stroke-width: 1; stroke-dasharray: 2 3; }
+.port rect { fill: var(--reach-sea-deep); stroke: var(--reach-on-dark); stroke-width: 1.4; }
+.swatch-port { width: 9px; height: 9px; border-radius: 0; transform: rotate(45deg); background: var(--reach-sea-deep); outline: 1.4px solid var(--reach-on-dark); }
 .tip rect { fill: color-mix(in srgb, var(--reach-ground) 94%, transparent); stroke: var(--reach-rule); stroke-width: 1; }
 .tip-name { font-family: var(--reach-sans); font-size: 14px; font-weight: 600; fill: var(--reach-bone); }
 .tip-sub { font-family: var(--reach-sans); font-size: 12px; fill: var(--reach-ink-soft); letter-spacing: 0.02em; }
-.node .pulse { fill: none; stroke: var(--reach-ochre); stroke-width: 2; animation: pulse 1.4s ease-out 1; }
+.node .pulse { fill: none; stroke: var(--reach-chart-ochre); stroke-width: 2; animation: pulse 1.4s ease-out 1; }
 @keyframes pulse { 0% { r: 8; opacity: 1; } 100% { r: 30; opacity: 0; } }
 .chip.is-changed { box-shadow: 0 0 0 2px var(--reach-ochre); }
 .chart-dir { position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 2px; background: color-mix(in srgb, var(--reach-ground) 86%, transparent); border: 1px solid var(--reach-rule); padding: 3px; backdrop-filter: blur(3px); }
 .choice-note { text-transform: none; letter-spacing: 0; }
-.preset-link { font-family: var(--reach-sans); font-size: 0.85rem; background: transparent; border: 0; color: var(--reach-bone); text-decoration: underline; cursor: pointer; padding: 0; }
+.preset-link { font-family: var(--reach-sans); font-size: 0.85rem; background: transparent; border: 0; color: var(--reach-on-dark); text-decoration: underline; cursor: pointer; padding: 0; }
 .share { font-family: var(--reach-sans); font-size: 0.9rem; background: transparent; border: 1px solid color-mix(in srgb, var(--reach-bone) 35%, transparent); color: var(--reach-bone); padding: 0.2rem 0.55rem; cursor: pointer; margin-left: 0.6rem; }
 .share:hover { border-color: var(--reach-bone); }
 .reading-source a { color: var(--reach-bone); text-decoration: underline; text-decoration-color: var(--reach-ochre); text-underline-offset: 2px; }

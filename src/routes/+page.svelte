@@ -373,8 +373,8 @@
 				<li><span class="swatch swatch-land"></span>Land</li>
 				<li><span class="swatch swatch-port"></span>Landing</li>
 				{#if routeLines.length > 0}
-					<li><span class="swatch swatch-line" style:background="var(--reach-bone)"></span>Route by water</li>
-					<li><span class="swatch swatch-line" style:background="var(--reach-ochre)"></span>Route by land</li>
+					<li><span class="swatch swatch-line" style:background="var(--reach-on-dark)"></span>Route by water</li>
+					<li><span class="swatch swatch-line" style:background="var(--reach-chart-ochre)"></span>Route by land</li>
 					{#if anyAlt}<li><span class="swatch swatch-line is-alt"></span>Nearly as quick</li>{/if}
 				{/if}
 			</ul>
