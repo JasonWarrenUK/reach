@@ -43,6 +43,8 @@ The Svelte 5 / SvelteKit 2 port of `reach-of-surrentum.jsx` is complete, tested 
   - Note: per [`docs/spikes/3ex1-year-control.md`](../spikes/3ex1-year-control.md) (approved 2026-09-17): a `YearBand` control with four segments bounded by Vegetius 4.39 (10 March, 27 May, 14 September, 11 November), widths proportional to day counts, band starting at 10 March. `SeasonKey` stays three-valued; segments map onto it. Hash param `s` takes `spring`, `sailing`, `autumn`, `winter`, with legacy `shoulder` read as `spring`; `readHash` (`src/lib/hash-state.ts:29`) must validate `s` against the segment table, since `SEASONS` has no `spring` or `autumn` key, and the page derives `SeasonKey` from the segment. No time term on `returnFactorAt`, no harvest marks, no day-level scrubbing.
 - [ ] **3EX.3**: Write the concept and process write-up (the historical argument and the build story, one document) _(blocked: depends on 2MD.4, 2MD.7, 3EX.2)_
   - Note: covers both what the toy is arguing about antiquity and what building it involved, combining devlog and concept framing in one document. Depends on the M2 and M3 implementation tasks finishing first: the build story can't be written until the build is done.
+- [ ] **3EX.4**: Harden `readHash`'s `who`/`load`/`tolerance` lookups against inherited-key values
+  - Note: `readHash` validates `who`, `load` and `tolerance` by truthiness against `PERSONAS`, `LOADS` and `TOLERANCES`, so a value like `w=constructor` passes as valid and crashes downstream (`PERSONAS[initial.who].load` throws in `+page.svelte`). Same bug class as the segment param, fixed in `readSegment` via `Object.hasOwn` (PR #2, commit `1a10b85`). Apply the same guard to the `who`/`load`/`tolerance` lookups in `hash-state.ts`. Pre-existing on `main`; not a regression from that PR.
 
 ---
 
@@ -72,6 +74,7 @@ graph LR
 	3EX.1["3EX.1: Research spike: feasibility of translati…"]
 	3EX.2["3EX.2: Implement the year/time control per the…"]
 	3EX.3["3EX.3: Write the concept and process write-up (…"]
+	3EX.4["3EX.4: Harden readHash's who/load/tolerance loo…"]
 	M3["M3: Exploration & Close"]:::mile
 	1DP.1 --> 1DP.2
 	1DP.2 --> M1
@@ -94,7 +97,8 @@ graph LR
 	3EX.1 --> 3EX.2
 	3EX.2 --> 3EX.3
 	3EX.3 --> M3
-	class 2MD.1,3EX.2 todo
+	3EX.4 --> M3
+	class 2MD.1,3EX.2,3EX.4 todo
 	class 2MD.2,2MD.3,2MD.4,2MD.5,2MD.6,2MD.7,3EX.3 blocked
 	class 1DP.1,1DP.2,3EX.1 done
 ```
