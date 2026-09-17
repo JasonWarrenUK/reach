@@ -208,12 +208,17 @@
 	color: var(--reach-ochre); margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--reach-rule);
 }
 .spheres-intro { margin: 0 0 1.5rem; color: var(--reach-ink-soft); font-size: 1rem; max-width: 40rem; }
-.sphere { display: flex; gap: 1.25rem; margin-bottom: 1.75rem; }
-.sphere-band { width: 5px; flex: 0 0 5px; }
-.sphere-body { min-width: 0; flex: 1; }
-.sphere-body h3 { font-family: var(--reach-display); font-weight: 400; font-size: 1.7rem; line-height: 1.05; margin: 0; color: var(--reach-bone); }
-.sphere-range { font-family: var(--reach-sans); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--reach-ochre); margin: 0.2rem 0 0.6rem; }
-.sphere-body p { margin: 0 0 0.8rem; max-width: 40rem; font-size: 1rem; }
+/* Each sphere is a closed <details>: the band, the name, its bracket and a count
+   stay on show; the gist and the places fold away. */
+.sphere { border-left: 5px solid var(--sphere-band); padding-left: 1.25rem; margin-bottom: 0.6rem; }
+.sphere > summary { padding: 0.45rem 0; }
+.sphere-head { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 1rem; }
+.sphere h3 { font-family: var(--reach-display); font-weight: 400; font-size: 1.7rem; line-height: 1.05; margin: 0; color: var(--reach-bone); }
+.sphere-range { font-family: var(--reach-sans); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--reach-ochre); }
+.sphere-count { flex: none; font-family: var(--reach-sans); font-size: 0.9rem; letter-spacing: 0.02em; color: var(--reach-ink-soft); padding: 0.1rem 0.4rem; }
+.sphere-count.is-changed { box-shadow: 0 0 0 2px var(--reach-ochre); }
+.sphere p { margin: 0.35rem 0 0.8rem; max-width: 40rem; font-size: 1rem; }
+.sphere[open] { margin-bottom: 1.5rem; }
 .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; margin: 0; }
 .chip { font-family: var(--reach-sans); font-size: 0.98rem; background: transparent; border: 1px solid color-mix(in srgb, var(--reach-bone) 35%, transparent); padding: 0.32rem 0.65rem; cursor: pointer; color: var(--reach-bone); min-height: 36px; }
 .chip:hover { border-color: var(--reach-bone); }
@@ -223,12 +228,13 @@
 
 .notes h3 { font-family: var(--reach-display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; margin: 0; color: var(--reach-bone); }
 .notes p { margin: 0 0 1.1rem; }
-/* Notes fold away: the section is one closed <details>, each note a closed child of it. */
-.notes summary { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; }
-.notes summary::-webkit-details-marker { display: none; }
-.notes summary::after { content: "+"; flex: none; font-family: var(--reach-sans); font-size: 1.3rem; font-weight: 500; line-height: 1; color: var(--reach-ochre); }
-.notes details[open] > summary::after { content: "\2212"; }
-.notes summary:focus-visible { outline: 2px solid var(--reach-ochre); outline-offset: 2px; }
+/* Notes fold away: the section is one closed <details>, each note a closed child of it.
+   The spheres above share the same summary row and its plus/minus mark. */
+.notes summary, .sphere > summary { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; }
+.notes summary::-webkit-details-marker, .sphere > summary::-webkit-details-marker { display: none; }
+.notes summary::after, .sphere > summary::after { content: "+"; flex: none; font-family: var(--reach-sans); font-size: 1.3rem; font-weight: 500; line-height: 1; color: var(--reach-ochre); }
+.notes details[open] > summary::after, .sphere[open] > summary::after { content: "\2212"; }
+.notes summary:focus-visible, .sphere > summary:focus-visible { outline: 2px solid var(--reach-ochre); outline-offset: 2px; }
 .notes-all > summary { padding-bottom: 0.5rem; border-bottom: 1px solid var(--reach-rule); }
 .notes-all > summary h2 { margin: 0; padding: 0; border: 0; }
 .note { border-bottom: 1px solid color-mix(in srgb, var(--reach-rule) 35%, transparent); }
@@ -275,7 +281,7 @@
 	.node .label { font-size: 16px; }
 	.ring text { font-size: 14px; }
 	.spheres, .notes { margin-top: 2.5rem; padding: 0 1rem; }
-	.sphere { gap: 0.85rem; margin-bottom: 1.5rem; }
-	.sphere-body p { font-size: 0.96rem; }
+	.sphere { padding-left: 0.85rem; }
+	.sphere p { font-size: 0.96rem; }
 }
 @media (prefers-reduced-motion: reduce) { .node, .compare-ring, .route-line { transition: none; } }

@@ -395,40 +395,43 @@
 				: ""}. Marks are coloured on a continuous ramp by days; the brackets are where the list draws its lines.
 		</p>
 		{#each SPHERES as s (s.n)}
-			<article class="sphere">
-				<div class="sphere-band" style:background={SPHERE_COLOUR[s.n]}></div>
-				<div class="sphere-body">
-					<h3>{s.name}</h3>
-					<p class="sphere-range">{s.range}</p>
-					<p>{s.gist}</p>
-					<ul class="chips">
-						{#if grouped[s.n].length === 0}
-							<li class="chip-empty">Nothing here under these conditions.</li>
-						{/if}
-						{#each grouped[s.n] as m (m.id)}
-							<li>
-								<button type="button" class="chip" class:is-on={pins.includes(m.id)} class:is-changed={flash.has(m.id)} onclick={() => chooseAndFocus(m)}>
-									{m.name}<span class="chip-days">{m.id === "surrentum" ? "" : formatDays(m.days)}</span>
-								</button>
-							</li>
-						{/each}
-					</ul>
-				</div>
-			</article>
+			{@const members = grouped[s.n]}
+			<details class="sphere" style:--sphere-band={SPHERE_COLOUR[s.n]}>
+				<summary>
+					<span class="sphere-head">
+						<h3>{s.name}</h3>
+						<span class="sphere-range">{s.range}</span>
+					</span>
+					<span class="sphere-count" class:is-changed={members.some((m) => flash.has(m.id))}>{members.length} {members.length === 1 ? "place" : "places"}</span>
+				</summary>
+				<p>{s.gist}</p>
+				<ul class="chips">
+					{#if members.length === 0}
+						<li class="chip-empty">Nothing here under these conditions.</li>
+					{/if}
+					{#each members as m (m.id)}
+						<li>
+							<button type="button" class="chip" class:is-on={pins.includes(m.id)} class:is-changed={flash.has(m.id)} onclick={() => chooseAndFocus(m)}>
+								{m.name}<span class="chip-days">{m.id === "surrentum" ? "" : formatDays(m.days)}</span>
+							</button>
+						</li>
+					{/each}
+				</ul>
+			</details>
 		{/each}
 		{#if unreachable.length > 0}
-			<article class="sphere">
-				<div class="sphere-band" style:background="var(--reach-chart-dim)"></div>
-				<div class="sphere-body">
-					<h3>No Open Route</h3>
-					<p>No way of getting there, as set.</p>
-					<ul class="chips">
-						{#each unreachable as m (m.id)}
-							<li><button type="button" class="chip" class:is-on={pins.includes(m.id)} onclick={() => chooseAndFocus(m)}>{m.name}</button></li>
-						{/each}
-					</ul>
-				</div>
-			</article>
+			<details class="sphere" style:--sphere-band="var(--reach-chart-dim)">
+				<summary>
+					<span class="sphere-head"><h3>No Open Route</h3></span>
+					<span class="sphere-count">{unreachable.length} {unreachable.length === 1 ? "place" : "places"}</span>
+				</summary>
+				<p>No way of getting there, as set.</p>
+				<ul class="chips">
+					{#each unreachable as m (m.id)}
+						<li><button type="button" class="chip" class:is-on={pins.includes(m.id)} onclick={() => chooseAndFocus(m)}>{m.name}</button></li>
+					{/each}
+				</ul>
+			</details>
 		{/if}
 	</section>
 
