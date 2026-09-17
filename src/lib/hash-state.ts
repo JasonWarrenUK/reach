@@ -24,8 +24,9 @@ const LEGACY_SEASON_ALIASES: Record<string, SegmentKey> = { shoulder: "spring" }
 
 function readSegment(raw: string | null): SegmentKey | undefined {
 	if (raw === null) return undefined;
-	if ((SEGMENTS as Record<string, unknown>)[raw]) return raw as SegmentKey;
-	return LEGACY_SEASON_ALIASES[raw];
+	if (Object.hasOwn(SEGMENTS, raw)) return raw as SegmentKey;
+	if (Object.hasOwn(LEGACY_SEASON_ALIASES, raw)) return LEGACY_SEASON_ALIASES[raw];
+	return undefined;
 }
 
 /** Pure parse of the hash fragment (no leading "#"), split out so it is testable without `window`. */
