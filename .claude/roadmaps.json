@@ -46,7 +46,7 @@
 						"dependsOn": [
 							"2MD.1"
 						],
-						"notes": "Decides the fragment schema across the authored-to-generated continuum (exact persona+season+vehicle+location, down through interstitial combinations, to deterministic stitched generic prose), the tie-break rule when two fragments are equally specific along different dimensions, and whether leg-level drill-down is a separate reading surface or an inline expand/collapse of the whole-journey text."
+						"notes": "Decides the fragment schema across the authored-to-generated continuum (exact persona+season+vehicle+location, down through interstitial combinations, to deterministic stitched generic prose), the tie-break rule when two fragments are equally specific along different dimensions, and whether leg-level drill-down is a separate reading surface or an inline expand/collapse of the whole-journey text. Season key: per the approved 3EX.1 spike (docs/spikes/3ex1-year-control.md), SeasonKey stays three-valued (sailing, shoulder, winter) and a four-segment calendar layer (spring, sailing, autumn, winter) maps onto it. Key fragments on SeasonKey; treat the segment as an optional, more specific rung on the ladder."
 					},
 					{
 						"id": "2MD.3",
@@ -109,20 +109,21 @@
 					{
 						"id": "3EX.1",
 						"description": "Research spike: feasibility of translating the seasonal model into a continuous year control",
-						"status": "todo",
+						"status": "done",
 						"dependsOn": [],
-						"notes": "SEASONS[season].forbid is a discrete closed-mode list and returnFactorAt has no time term; true continuity needs either dated closures and a seasonal wind curve, or an honest admission that a stepped control snapped to real Roman calendar moments (sailing season opening, harvest, mare clausum) is the defensible option. A recommendation against full continuity, in favour of the stepped version, is an acceptable spike outcome. Output: a written recommendation for approval."
+						"notes": "Outcome: stepped control approved 2026-09-17, see docs/spikes/3ex1-year-control.md. Original brief: SEASONS[season].forbid is a discrete closed-mode list and returnFactorAt has no time term; true continuity needs either dated closures and a seasonal wind curve, or an honest admission that a stepped control snapped to real Roman calendar moments (sailing season opening, harvest, mare clausum) is the defensible option. A recommendation against full continuity, in favour of the stepped version, is an acceptable spike outcome. Output: a written recommendation for approval."
 					},
 					{
 						"id": "3EX.2",
 						"description": "Implement the year/time control per the spike's recommendation",
-						"status": "blocked",
+						"status": "todo",
 						"dependsOn": [
 							"3EX.1"
 						],
 						"softDependsOn": [
 							"1DP.2"
-						]
+						],
+						"notes": "Per docs/spikes/3ex1-year-control.md (approved 2026-09-17): a YearBand control with four segments bounded by Vegetius 4.39 (10 March, 27 May, 14 September, 11 November), widths proportional to day counts, band starting at 10 March. SeasonKey stays three-valued; segments map onto it. Hash param s takes spring, sailing, autumn, winter, with legacy shoulder read as spring; readHash (src/lib/hash-state.ts:29) must validate s against the segment table, since SEASONS has no spring or autumn key, and the page derives SeasonKey from the segment. No time term on returnFactorAt, no harvest marks, no day-level scrubbing."
 					},
 					{
 						"id": "3EX.3",

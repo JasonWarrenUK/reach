@@ -54,6 +54,7 @@ tests/
   fixtures/              # named-export test fixtures
 docs/
   adrs/                  # architecture decision records
+  spikes/                # research and design spike write-ups
 ```
 
 `reach-of-surrentum.jsx` at the repo root is the original React artefact this project was ported from. It's kept, not dead weight: several files under `src/lib/` cite its line numbers in comments, and it's the source of truth the port was verified against. See the ADR below for the translation rationale.
