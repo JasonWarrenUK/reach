@@ -66,6 +66,10 @@
 	--reach-flag-bg: color-mix(in srgb, var(--reach-red-deep) 55%, var(--reach-ground));
 	--reach-route-bg: color-mix(in srgb, var(--reach-ground) 85%, var(--reach-rule));
 
+	/* One measure for every full-width block, so their left edges line up.
+	   The wide-desktop query at the foot of this file raises it. */
+	--reach-page: 62rem;
+
 	background: var(--reach-ground); color: var(--reach-ink);
 	font-family: var(--reach-serif); font-size: 19px; line-height: 1.6;
 	padding: 0 0 5rem; min-height: 100%;
@@ -75,7 +79,7 @@
 .reach ::selection { background: var(--reach-red); color: var(--reach-on-dark); }
 
 /* ---- masthead: the title as an inscription, the question as the panel ---- */
-.masthead { max-width: 62rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+.masthead { max-width: var(--reach-page); margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
 .masthead-eyebrow { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
 .masthead-inner { max-width: 44rem; }
 .masthead h1 {
@@ -94,7 +98,7 @@
 /* ---- the frieze: a red band carrying the conditions ---- */
 .frieze { background: var(--reach-red-deep); border-top: 1px solid var(--reach-ochre); border-bottom: 1px solid var(--reach-ochre); }
 .controls {
-	max-width: 62rem; margin: 0 auto; min-width: 0; padding: 1.35rem 1.5rem 1.25rem;
+	max-width: var(--reach-page); margin: 0 auto; min-width: 0; padding: 1.35rem 1.5rem 1.25rem;
 	display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1rem 2.25rem;
 }
 .choice { border: 0; padding: 0; margin: 0; min-width: 0; max-width: 100%; }
@@ -114,7 +118,7 @@
 
 /* ---- stage ---- */
 .stage {
-	max-width: 62rem; margin: 2rem auto 0; padding: 0 1.5rem; display: grid;
+	max-width: var(--reach-page); margin: 2rem auto 0; padding: 0 1.5rem; display: grid;
 	grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-areas: "chart panel" "notes panel";
 	gap: 1.25rem 2rem; align-items: start;
 }
@@ -201,7 +205,7 @@
 .compare-figs { font-family: var(--reach-sans); font-size: 0.9rem; color: var(--reach-ink-soft); }
 
 /* ---- sections ---- */
-.spheres, .notes { max-width: 62rem; margin: 3.5rem auto 0; padding: 0 1.5rem; }
+.spheres, .notes { max-width: var(--reach-page); margin: 3.5rem auto 0; padding: 0 1.5rem; }
 .notes { max-width: 44rem; }
 .spheres h2, .notes h2 {
 	font-family: var(--reach-sans); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -283,5 +287,30 @@
 	.spheres, .notes { margin-top: 2.5rem; padding: 0 1rem; }
 	.sphere { padding-left: 0.85rem; }
 	.sphere p { font-size: 0.96rem; }
+}
+
+/* ---- wide desktop: spend the width ----
+   The page measure grows, the standfirst moves up beside the title, the chart's
+   captions and legend become a third column beside the reading panel, and the
+   two folding sections (spheres, notes) sit side by side. */
+@media (min-width: 1280px) {
+	.reach { --reach-page: 88rem; }
+	.masthead { padding-top: 3rem; }
+	.masthead-inner { max-width: none; display: flex; align-items: flex-end; gap: 4rem; }
+	.masthead h1 { margin-bottom: 0; }
+	.standfirst { max-width: 40rem; padding-bottom: 0.35rem; }
+	.persona-blurb { max-width: 64rem; }
+	.stage {
+		grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.7fr);
+		grid-template-areas: "chart panel notes";
+	}
+	.lower {
+		max-width: var(--reach-page); margin: 3.5rem auto 0; padding: 0 1.5rem;
+		display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 0 3rem; align-items: start;
+	}
+	.lower .spheres, .lower .notes { max-width: none; margin: 0; padding: 0; }
+	/* Keeps the Notes rule level with the Spheres rule beside it: the mark's
+	   line box otherwise drops half a pixel below the heading's. */
+	.lower .notes-all > summary::after { line-height: 0.9; }
 }
 @media (prefers-reduced-motion: reduce) { .node, .compare-ring, .route-line { transition: none; } }

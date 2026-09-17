@@ -387,85 +387,87 @@
 		</div>
 	</div>
 
-	<section class="spheres">
-		<h2>Spheres</h2>
-		<p class="spheres-intro">
-			Brackets of one-way travel time, for {season === "sailing" ? "the sailing season" : SEASONS[season].label.toLowerCase()} and {persona.label.toLowerCase()}{back
-				? ", homeward"
-				: ""}. Marks are coloured on a continuous ramp by days; the brackets are where the list draws its lines.
-		</p>
-		{#each SPHERES as s (s.n)}
-			{@const members = grouped[s.n]}
-			<details class="sphere" style:--sphere-band={SPHERE_COLOUR[s.n]}>
-				<summary>
-					<span class="sphere-head">
-						<h3>{s.name}</h3>
-						<span class="sphere-range">{s.range}</span>
-					</span>
-					<span class="sphere-count" class:is-changed={members.some((m) => flash.has(m.id))}>{members.length} {members.length === 1 ? "place" : "places"}</span>
-				</summary>
-				<p>{s.gist}</p>
-				<ul class="chips">
-					{#if members.length === 0}
-						<li class="chip-empty">Nothing here under these conditions.</li>
-					{/if}
-					{#each members as m (m.id)}
-						<li>
-							<button type="button" class="chip" class:is-on={pins.includes(m.id)} class:is-changed={flash.has(m.id)} onclick={() => chooseAndFocus(m)}>
-								{m.name}<span class="chip-days">{m.id === "surrentum" ? "" : formatDays(m.days)}</span>
-							</button>
-						</li>
-					{/each}
-				</ul>
-			</details>
-		{/each}
-		{#if unreachable.length > 0}
-			<details class="sphere" style:--sphere-band="var(--reach-chart-dim)">
-				<summary>
-					<span class="sphere-head"><h3>No Open Route</h3></span>
-					<span class="sphere-count">{unreachable.length} {unreachable.length === 1 ? "place" : "places"}</span>
-				</summary>
-				<p>No way of getting there, as set.</p>
-				<ul class="chips">
-					{#each unreachable as m (m.id)}
-						<li><button type="button" class="chip" class:is-on={pins.includes(m.id)} onclick={() => chooseAndFocus(m)}>{m.name}</button></li>
-					{/each}
-				</ul>
-			</details>
-		{/if}
-	</section>
+	<div class="lower">
+		<section class="spheres">
+			<h2>Spheres</h2>
+			<p class="spheres-intro">
+				Brackets of one-way travel time, for {season === "sailing" ? "the sailing season" : SEASONS[season].label.toLowerCase()} and {persona.label.toLowerCase()}{back
+					? ", homeward"
+					: ""}. Marks are coloured on a continuous ramp by days; the brackets are where the list draws its lines.
+			</p>
+			{#each SPHERES as s (s.n)}
+				{@const members = grouped[s.n]}
+				<details class="sphere" style:--sphere-band={SPHERE_COLOUR[s.n]}>
+					<summary>
+						<span class="sphere-head">
+							<h3>{s.name}</h3>
+							<span class="sphere-range">{s.range}</span>
+						</span>
+						<span class="sphere-count" class:is-changed={members.some((m) => flash.has(m.id))}>{members.length} {members.length === 1 ? "place" : "places"}</span>
+					</summary>
+					<p>{s.gist}</p>
+					<ul class="chips">
+						{#if members.length === 0}
+							<li class="chip-empty">Nothing here under these conditions.</li>
+						{/if}
+						{#each members as m (m.id)}
+							<li>
+								<button type="button" class="chip" class:is-on={pins.includes(m.id)} class:is-changed={flash.has(m.id)} onclick={() => chooseAndFocus(m)}>
+									{m.name}<span class="chip-days">{m.id === "surrentum" ? "" : formatDays(m.days)}</span>
+								</button>
+							</li>
+						{/each}
+					</ul>
+				</details>
+			{/each}
+			{#if unreachable.length > 0}
+				<details class="sphere" style:--sphere-band="var(--reach-chart-dim)">
+					<summary>
+						<span class="sphere-head"><h3>No Open Route</h3></span>
+						<span class="sphere-count">{unreachable.length} {unreachable.length === 1 ? "place" : "places"}</span>
+					</summary>
+					<p>No way of getting there, as set.</p>
+					<ul class="chips">
+						{#each unreachable as m (m.id)}
+							<li><button type="button" class="chip" class:is-on={pins.includes(m.id)} onclick={() => chooseAndFocus(m)}>{m.name}</button></li>
+						{/each}
+					</ul>
+				</details>
+			{/if}
+		</section>
 
-	<section class="notes">
-		<details class="notes-all">
-			<summary><h2>Notes</h2></summary>
-			<details class="note">
-				<summary><h3>Reach Is a Starfish</h3></summary>
-				<p>The bay is a road and the mountain behind the town is a wall. Reach runs north-west across the water and barely moves to the south or east; the empty quarter on every chart is open sea.</p>
+		<section class="notes">
+			<details class="notes-all">
+				<summary><h2>Notes</h2></summary>
+				<details class="note">
+					<summary><h3>Reach Is a Starfish</h3></summary>
+					<p>The bay is a road and the mountain behind the town is a wall. Reach runs north-west across the water and barely moves to the south or east; the empty quarter on every chart is open sea.</p>
+				</details>
+				<details class="note">
+					<summary><h3>Winter Strikes Every Leg That Touches the Sea</h3></summary>
+					<p>
+						The sea was open from late May to mid-September and marginal either side: in the shoulder months boats and coasters ran, and nobody committed a laden merchantman
+						to open water. From mid-November it was shut. With the sea shut the islands drop off and the bay towns survive by the long walk round the shore; Nuceria and Capua
+						barely notice.
+					</p>
+				</details>
+				<details class="note">
+					<summary><h3>Load Is Physics; Tolerance Is Preference</h3></summary>
+					<p>
+						A pack slows a walker a little and a mule-load a lot; a cargo of amphorae cannot go over a mule track at all. None of it slows a boat. Tolerance for discomfort
+						decides between routes and changes nothing else: the time shown is that of the route taken. A villa household can hire a boat and buy passage on a ship; a fishing
+						family has its own boat and works a passage; a tenant walks or waits for a lift, and under that setting Naples costs a day and a half.
+					</p>
+				</details>
+				<details class="note">
+					<summary><h3>The Coast Is the Coast of AD 60</h3></summary>
+					<p>
+						The eruption of 79 pushed the shore out by half a kilometre at Herculaneum and by a kilometre along the Sarno plain, and the Tiber has since carried Ostia three
+						kilometres inland. The chart draws the earlier line, so the towns sit on the water they had. Where a town's landing was somewhere else (Marina Grande below Capri,
+						the river port below Pompeii, the landing below Surrentum), it is marked.
+					</p>
+				</details>
 			</details>
-			<details class="note">
-				<summary><h3>Winter Strikes Every Leg That Touches the Sea</h3></summary>
-				<p>
-					The sea was open from late May to mid-September and marginal either side: in the shoulder months boats and coasters ran, and nobody committed a laden merchantman
-					to open water. From mid-November it was shut. With the sea shut the islands drop off and the bay towns survive by the long walk round the shore; Nuceria and Capua
-					barely notice.
-				</p>
-			</details>
-			<details class="note">
-				<summary><h3>Load Is Physics; Tolerance Is Preference</h3></summary>
-				<p>
-					A pack slows a walker a little and a mule-load a lot; a cargo of amphorae cannot go over a mule track at all. None of it slows a boat. Tolerance for discomfort
-					decides between routes and changes nothing else: the time shown is that of the route taken. A villa household can hire a boat and buy passage on a ship; a fishing
-					family has its own boat and works a passage; a tenant walks or waits for a lift, and under that setting Naples costs a day and a half.
-				</p>
-			</details>
-			<details class="note">
-				<summary><h3>The Coast Is the Coast of AD 60</h3></summary>
-				<p>
-					The eruption of 79 pushed the shore out by half a kilometre at Herculaneum and by a kilometre along the Sarno plain, and the Tiber has since carried Ostia three
-					kilometres inland. The chart draws the earlier line, so the towns sit on the water they had. Where a town's landing was somewhere else (Marina Grande below Capri,
-					the river port below Pompeii, the landing below Surrentum), it is marked.
-				</p>
-			</details>
-		</details>
-	</section>
+		</section>
+	</div>
 </div>
