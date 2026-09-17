@@ -292,7 +292,9 @@
 /* ---- wide desktop: spend the width ----
    The page measure grows, the standfirst moves up beside the title, the chart's
    captions and legend become a third column beside the reading panel, and the
-   two folding sections (spheres, notes) sit side by side. */
+   two folding sections (spheres, notes) sit side by side. +page.svelte opens the
+   Notes list by default at this width, so its WIDE_DESKTOP query must match this
+   one. */
 @media (min-width: 1280px) {
 	.reach { --reach-page: 88rem; }
 	.masthead { padding-top: 3rem; }

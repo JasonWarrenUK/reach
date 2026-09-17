@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { PLACES } from "$lib/data/places";
 	import { SEASONS, PERSONAS, LOADS, TOLERANCES, type SeasonKey, type PersonaKey, type LoadKey, type ToleranceKey } from "$lib/data/travellers";
 	import { makeTraveller } from "$lib/data/travellers";
@@ -37,6 +38,13 @@
 	let hovered: string | null = $state(null);
 	let flash: Set<string> = $state(new Set());
 	let shared = $state(false);
+
+	/** Beside the spheres (the wide-desktop query in reach.css) the Notes list starts open; stacked below them it starts shut. */
+	const WIDE_DESKTOP = "(min-width: 1280px)";
+	let notesOpen = $state(false);
+	onMount(() => {
+		notesOpen = window.matchMedia(WIDE_DESKTOP).matches;
+	});
 
 	const reduceMotionSource = createPrefersReducedMotion();
 	let reduceMotion = $derived(reduceMotionSource.value);
@@ -437,7 +445,7 @@
 		</section>
 
 		<section class="notes">
-			<details class="notes-all">
+			<details class="notes-all" bind:open={notesOpen}>
 				<summary><h2>Notes</h2></summary>
 				<details class="note">
 					<summary><h3>Reach Is a Starfish</h3></summary>
