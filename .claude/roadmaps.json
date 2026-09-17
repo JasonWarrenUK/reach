@@ -123,7 +123,7 @@
 						"softDependsOn": [
 							"1DP.2"
 						],
-						"notes": "Per docs/spikes/3ex1-year-control.md (approved 2026-09-17): a YearBand control with four segments bounded by Vegetius 4.39 (10 March, 27 May, 14 September, 11 November), widths proportional to day counts, band starting at 10 March. SeasonKey stays three-valued; segments map onto it. Hash param s takes spring, sailing, autumn, winter, with legacy shoulder read as spring. No time term on returnFactorAt, no harvest marks, no day-level scrubbing."
+						"notes": "Per docs/spikes/3ex1-year-control.md (approved 2026-09-17): a YearBand control with four segments bounded by Vegetius 4.39 (10 March, 27 May, 14 September, 11 November), widths proportional to day counts, band starting at 10 March. SeasonKey stays three-valued; segments map onto it. Hash param s takes spring, sailing, autumn, winter, with legacy shoulder read as spring; readHash (src/lib/hash-state.ts:29) must validate s against the segment table, since SEASONS has no spring or autumn key, and the page derives SeasonKey from the segment. No time term on returnFactorAt, no harvest marks, no day-level scrubbing."
 					},
 					{
 						"id": "3EX.3",
