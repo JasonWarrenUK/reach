@@ -11,7 +11,9 @@ function daysBetween(from: string, to: string): number {
 
 describe("SEGMENTS", () => {
 	it("has four day counts summing to 365", () => {
-		const total = SEGMENT_ORDER.reduce((sum, k) => sum + SEGMENTS[k].days, 0);
+		const keys = Object.keys(SEGMENTS) as typeof SEGMENT_ORDER;
+		expect([...SEGMENT_ORDER].sort()).toEqual([...keys].sort());
+		const total = keys.reduce((sum, k) => sum + SEGMENTS[k].days, 0);
 		expect(total).toBe(365);
 	});
 
