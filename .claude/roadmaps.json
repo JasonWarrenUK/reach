@@ -23,11 +23,6 @@
 						"status": "done",
 						"dependsOn": [
 							"1DP.1"
-						],
-						"softDependsOn": [
-							"2MD.4",
-							"2MD.7",
-							"3EX.2"
 						]
 					}
 				]
@@ -68,6 +63,9 @@
 						"dependsOn": [
 							"2MD.2",
 							"2MD.3"
+						],
+						"softDependsOn": [
+							"1DP.2"
 						]
 					},
 					{
@@ -86,8 +84,6 @@
 						"description": "Design spike: comparison surface for two full models (overlay, delta readout or difference-as-projection)",
 						"status": "blocked",
 						"dependsOn": [
-							"2MD.1",
-							"2MD.3",
 							"2MD.5"
 						],
 						"notes": "Output is a written recommendation for approval. Candidates: a ghost chart overlaying two coastline-clipped isochrone sets; a delta readout (\"the tenant reaches 11 fewer places; Rome moves from sphere 4 to sphere 5\"); or the difference itself as the chart's projection. Blocked on the persona roster and full-coverage floor because comparing two models is meaningless if either side has no narrative content."
@@ -98,6 +94,9 @@
 						"status": "blocked",
 						"dependsOn": [
 							"2MD.6"
+						],
+						"softDependsOn": [
+							"1DP.2"
 						]
 					}
 				]
@@ -120,14 +119,21 @@
 						"status": "blocked",
 						"dependsOn": [
 							"3EX.1"
+						],
+						"softDependsOn": [
+							"1DP.2"
 						]
 					},
 					{
 						"id": "3EX.3",
 						"description": "Write the concept and process write-up (the historical argument and the build story, one document)",
-						"status": "todo",
-						"dependsOn": [],
-						"notes": "Close to final in the phase, not gating anything; covers both what the toy is arguing about antiquity and what building it involved, combining devlog and concept framing in one document."
+						"status": "blocked",
+						"dependsOn": [
+							"2MD.4",
+							"2MD.7",
+							"3EX.2"
+						],
+						"notes": "Covers both what the toy is arguing about antiquity and what building it involved, combining devlog and concept framing in one document. Depends on the M2 and M3 implementation tasks finishing first: the build story can't be written until the build is done."
 					}
 				]
 			}
