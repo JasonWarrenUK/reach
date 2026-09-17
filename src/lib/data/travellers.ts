@@ -103,7 +103,7 @@ export interface Load {
 }
 
 export const LOADS: Record<LoadKey, Load> = {
-	none: { label: "Nothing", blurb: "", factor: {}, forbid: [] },
+	none: { label: "Nothing", blurb: "Empty-handed. Every pace as it stands.", factor: {}, forbid: [] },
 	pack: { label: "A pack", blurb: "What one person carries.", factor: { foot: 0.85, track: 0.85 }, forbid: [] },
 	mule: { label: "A mule-load", blurb: "A laden animal, led on foot.", factor: { foot: 0.7, track: 0.7, road: 0.9 }, forbid: [] },
 	cargo: {

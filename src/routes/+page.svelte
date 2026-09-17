@@ -194,23 +194,42 @@
 		<div class="controls">
 			<Choice
 				legend="Time of year"
+				infoTitle="Time of Year"
 				value={season}
 				onChange={(v) => (season = v as SeasonKey)}
-				options={Object.entries(SEASONS).map(([k, v]) => ({ value: k, label: v.label }))}
+				options={Object.entries(SEASONS).map(([k, v]) => ({ value: k, label: v.label, blurb: v.blurb }))}
 			/>
-			<Choice legend="Who is travelling" value={who} onChange={setWho} options={Object.entries(PERSONAS).map(([k, v]) => ({ value: k, label: v.label }))}>
+			<Choice
+				legend="Who is travelling"
+				infoTitle="Who Is Travelling"
+				infoLead="A traveller is a preset: choosing one also sets what they carry and what they put up with, until you set those yourself."
+				value={who}
+				onChange={setWho}
+				options={Object.entries(PERSONAS).map(([k, v]) => ({
+					value: k,
+					label: v.label,
+					blurb: v.blurb,
+					detail: `Preset: ${LOADS[v.load].label.toLowerCase()}, ${TOLERANCES[v.tolerance].label.toLowerCase()}.`,
+				}))}
+			>
 				{#snippet note()}
 					{#if custom}<button type="button" class="preset-link" onclick={usePreset}>custom · use preset</button>{/if}
 				{/snippet}
 			</Choice>
-			<Choice legend="Carrying" value={load} onChange={setLoad} options={Object.entries(LOADS).map(([k, v]) => ({ value: k, label: v.label }))} />
-			<Choice legend="Puts up with" value={tolerance} onChange={setTolerance} options={Object.entries(TOLERANCES).map(([k, v]) => ({ value: k, label: v.label }))} />
-			<p class="persona-blurb">
-				<strong>{SEASONS[season].label}.</strong> {SEASONS[season].blurb}
-				<strong>{PERSONAS[who].label}.</strong> {PERSONAS[who].blurb}
-				<strong>{LOADS[load].label}:</strong> {LOADS[load].blurb}
-				<strong>{TOLERANCES[tolerance].label}:</strong> {TOLERANCES[tolerance].blurb}
-			</p>
+			<Choice
+				legend="Carrying"
+				infoTitle="Carrying"
+				value={load}
+				onChange={setLoad}
+				options={Object.entries(LOADS).map(([k, v]) => ({ value: k, label: v.label, blurb: v.blurb }))}
+			/>
+			<Choice
+				legend="Puts up with"
+				infoTitle="Puts Up With"
+				value={tolerance}
+				onChange={setTolerance}
+				options={Object.entries(TOLERANCES).map(([k, v]) => ({ value: k, label: v.label, blurb: v.blurb }))}
+			/>
 		</div>
 	</div>
 
