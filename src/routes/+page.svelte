@@ -21,6 +21,7 @@
 	import Reading from "$lib/components/Reading.svelte";
 	import Compare from "$lib/components/Compare.svelte";
 	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
+	import Provenance from "$lib/components/Provenance.svelte";
 
 	const initial = readHash() ?? {};
 
@@ -173,6 +174,7 @@
 	<header class="masthead">
 		<div class="masthead-eyebrow">
 			<ThemeToggle />
+			<Provenance />
 		</div>
 		<div class="masthead-inner">
 			<h1>Reach</h1>
@@ -463,16 +465,4 @@
 			</details>
 		</details>
 	</section>
-
-	<footer class="colophon">
-		<p>
-			Coastlines: OpenStreetMap for the bay, Natural Earth beyond, corrected to the first-century shore at Herculaneum, the Sarno plain and Ostia. Every place, every
-			point of coast and every point of water is costed by the same shortest path through one network of waypoints. Paces per travelling day of about ten hours: on foot
-			20 km, mule track 12, road 30, boat 35 in sheltered water or 25 on an exposed coast, coaster 110 after a third of a day at Puteoli to catch one, ship 180 after a
-			day and a half there for an open-sea passage (four days for a fishing family working a berth). A tenant's boat runs at 20 and costs a spell on the quay waiting for
-			a lift. Loads: a pack ×0.85 on land, a mule-load ×0.7, cargo by cart at 20 and never by track. Comfort weights, used only to choose between routes: ordinary 1.2 on
-			exposed coast and 1.15 on ships and tracks; delicate 1.6, 1.4 and 1.5, with 1.15 in a boat and 1.2 on foot. Homeward, open-sea legs cost ×1.3 to ×3.5 by the region
-			they leave.
-		</p>
-	</footer>
 </div>
