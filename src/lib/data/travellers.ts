@@ -64,7 +64,7 @@ export const PERSONAS: Record<PersonaKey, Persona> = {
 		tolerance: "hardy",
 	},
 	tenant: {
-		label: "Tenant on the terraces",
+		label: "Tenant farmer",
 		blurb: "Walks, or waits for a lift in someone else's boat. No business on a ship.",
 		allow: (leg, _km) => !(leg.m === "ship" || leg.m === "shipcoast"),
 		pace: { road: 25, boat: 20, coast: 15 },
