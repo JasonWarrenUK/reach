@@ -35,14 +35,14 @@
 					{
 						"id": "2MD.1",
 						"description": "Design spike: persona roster for narrative authoring (which personas ship, whether the existing villa/fisher/tenant set is right or changes)",
-						"status": "todo",
+						"status": "done",
 						"dependsOn": [],
-						"notes": "Output is a written recommendation for approval: keep, extend or revise the current three-persona roster (villa household, fishing family, tenant farmer) specifically for narrative-authoring purposes. Hard constraint carried forward into every downstream task: the tool must never ship in a state where only one persona has narrative content, since single-persona coverage defeats the comparison feature's purpose. This spike's roster is binding on 2MD.5 onward."
+						"notes": "Outcome: keep all three personas unchanged, approved 2026-09-18, see docs/spikes/2md1-persona-roster.md. Tenant persona relabelled to 'Tenant farmer' to match the roadmap wording. Output is a written recommendation for approval: keep, extend or revise the current three-persona roster (villa household, fishing family, tenant farmer) specifically for narrative-authoring purposes. Hard constraint carried forward into every downstream task: the tool must never ship in a state where only one persona has narrative content, since single-persona coverage defeats the comparison feature's purpose. This spike's roster is binding on 2MD.5 onward."
 					},
 					{
 						"id": "2MD.2",
 						"description": "Design spike: narrative fragment data model and specificity-ladder selection algorithm",
-						"status": "blocked",
+						"status": "todo",
 						"dependsOn": [
 							"2MD.1"
 						],

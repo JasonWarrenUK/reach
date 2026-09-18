@@ -2,7 +2,7 @@
 
 | Prop     | Value |
 |----------|-------|
-| Status   | Proposed |
+| Status   | Approved 2026-09-18 |
 | Date     | 2026-09-18 |
 | Task     | 2MD.1 |
 | Unblocks | 2MD.2, 2MD.5 |
@@ -96,4 +96,8 @@ The roadmap and task text call the third persona "tenant farmer"; the code calle
 
 ## Decisions
 
-Awaiting sign-off.
+Approved by Jason on 2026-09-18:
+
+1. Keep all three personas, unchanged in mechanics.
+2. Rename the tenant persona's label to "Tenant farmer".
+3. No fourth persona; the roster is closed for narrative-authoring purposes.

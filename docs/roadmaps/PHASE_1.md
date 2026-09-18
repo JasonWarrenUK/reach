@@ -19,9 +19,9 @@ The Svelte 5 / SvelteKit 2 port of `reach-of-surrentum.jsx` is complete, tested 
 
 **Goal:** the routing model gains legible depth, and journeys narrate themselves in prose that degrades gracefully from hand-written to generated.
 
-- [ ] **2MD.1**: Design spike: persona roster for narrative authoring (which personas ship, whether the existing villa/fisher/tenant set is right or changes)
-  - Note: output is a written recommendation for approval: keep, extend or revise the current three-persona roster (villa household, fishing family, tenant farmer) specifically for narrative-authoring purposes. Hard constraint carried forward into every downstream task: the tool must never ship in a state where only one persona has narrative content, since single-persona coverage defeats the comparison feature's purpose. This spike's roster is binding on 2MD.5 onward.
-- [ ] **2MD.2**: Design spike: narrative fragment data model and specificity-ladder selection algorithm _(blocked: depends on 2MD.1)_
+- [x] **2MD.1**: Design spike: persona roster for narrative authoring (which personas ship, whether the existing villa/fisher/tenant set is right or changes)
+  - Note: outcome: keep all three personas unchanged, approved 2026-09-18, see [`docs/spikes/2md1-persona-roster.md`](../spikes/2md1-persona-roster.md). Tenant persona relabelled to "Tenant farmer" to match the roadmap wording. Output is a written recommendation for approval: keep, extend or revise the current three-persona roster (villa household, fishing family, tenant farmer) specifically for narrative-authoring purposes. Hard constraint carried forward into every downstream task: the tool must never ship in a state where only one persona has narrative content, since single-persona coverage defeats the comparison feature's purpose. This spike's roster is binding on 2MD.5 onward.
+- [ ] **2MD.2**: Design spike: narrative fragment data model and specificity-ladder selection algorithm
   - Note: decides the fragment schema across the authored-to-generated continuum (exact persona+season+vehicle+location, down through interstitial combinations, to deterministic stitched generic prose), the tie-break rule when two fragments are equally specific along different dimensions, and whether leg-level drill-down is a separate reading surface or an inline expand/collapse of the whole-journey text. Season key: per the approved 3EX.1 spike ([`docs/spikes/3ex1-year-control.md`](../spikes/3ex1-year-control.md)), `SeasonKey` stays three-valued (sailing, shoulder, winter) and a four-segment calendar layer (spring, sailing, autumn, winter) maps onto it. Key fragments on `SeasonKey`; treat the segment as an optional, more specific rung on the ladder.
 - [ ] **2MD.3**: Build the narrative fragment store and specificity-ladder selector _(blocked: depends on 2MD.2)_
 - [ ] **2MD.4**: Implement whole-journey narration with leg-level drill-down per the spike's chosen UI model _(blocked: depends on 2MD.2, 2MD.3)_
@@ -98,7 +98,7 @@ graph LR
 	3EX.2 --> 3EX.3
 	3EX.3 --> M3
 	3EX.4 --> M3
-	class 2MD.1,3EX.4 todo
-	class 2MD.2,2MD.3,2MD.4,2MD.5,2MD.6,2MD.7,3EX.3 blocked
-	class 1DP.1,1DP.2,3EX.1,3EX.2 done
+	class 2MD.2,3EX.4 todo
+	class 2MD.3,2MD.4,2MD.5,2MD.6,2MD.7,3EX.3 blocked
+	class 1DP.1,1DP.2,2MD.1,3EX.1,3EX.2 done
 ```
