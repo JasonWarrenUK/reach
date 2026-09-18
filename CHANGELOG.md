@@ -5,6 +5,22 @@ Notable changes to Reach, newest first. The layout follows [Keep a Changelog](ht
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-18
+
+### Added
+
+- The "Time of year" control is now a four-segment year band (spring, sailing season, autumn, winter), sized to each segment's real share of the year rather than four equal buttons. Segment dates and copy follow Vegetius 4.39: autumn reads as doubtful because he names a sequence of dated storms, spring as dangerous because he names none.
+- Each segment's info panel explains its dates, day count and why it falls where it does in the sailing calendar.
+
+### Changed
+
+- The Spheres section now names the specific segment a reader has chosen (for example "the autumn shoulder") rather than the old three-way "shoulder months" wording.
+- Old links using the retired `s=shoulder` hash value still open, now landing on the spring segment.
+
+### Fixed
+
+- A hash value like `s=constructor` or `s=toString` no longer resolves to a live segment and crashes the routing layer; unrecognised values are rejected outright.
+
 ## [0.2.0] - 2026-09-17
 
 ### Added
