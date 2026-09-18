@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { PLACES } from "$lib/data/places";
-	import { SEASONS, PERSONAS, LOADS, TOLERANCES, type SeasonKey, type PersonaKey, type LoadKey, type ToleranceKey } from "$lib/data/travellers";
+	import { PERSONAS, LOADS, TOLERANCES, type SeasonKey, type PersonaKey, type LoadKey, type ToleranceKey } from "$lib/data/travellers";
 	import { makeTraveller } from "$lib/data/travellers";
+	import { SEGMENTS, segmentSeason, type SegmentKey } from "$lib/data/year";
 	import { SPHERES } from "$lib/data/spheres";
 	import { SPHERE_COLOUR } from "$lib/data/palette";
 	import { COAST_FINE, COAST_COARSE } from "$lib/data/coastlines";
@@ -17,6 +18,7 @@
 	import { createPrefersReducedMotion } from "$lib/reduced-motion.svelte";
 
 	import Choice from "$lib/components/Choice.svelte";
+	import YearBand from "$lib/components/YearBand.svelte";
 	import Coastline from "$lib/components/Coastline.svelte";
 	import RouteLines, { type RouteLine } from "$lib/components/RouteLines.svelte";
 	import Reading from "$lib/components/Reading.svelte";
@@ -28,7 +30,8 @@
 
 	let zoom = $state(initial.zoom ?? 3);
 	let projection: ProjectionKey = $state(initial.projection ?? "distance");
-	let season: SeasonKey = $state(initial.season ?? "sailing");
+	let segment: SegmentKey = $state(initial.segment ?? "sailing");
+	let season: SeasonKey = $derived(segmentSeason(segment));
 	let who: PersonaKey = $state(initial.who ?? "villa");
 	let load: LoadKey = $state(initial.load ?? PERSONAS[initial.who ?? "villa"].load);
 	let tolerance: ToleranceKey = $state(initial.tolerance ?? PERSONAS[initial.who ?? "villa"].tolerance);
@@ -120,11 +123,11 @@
 	});
 
 	$effect(() => {
-		writeHash({ zoom, projection, season, who, load, tolerance, direction, pins });
+		writeHash({ zoom, projection, segment, who, load, tolerance, direction, pins });
 	});
 
 	async function share() {
-		const url = writeHash({ zoom, projection, season, who, load, tolerance, direction, pins });
+		const url = writeHash({ zoom, projection, segment, who, load, tolerance, direction, pins });
 		try {
 			await navigator.clipboard.writeText(url || window.location.href);
 			shared = true;
@@ -192,13 +195,7 @@
 
 	<div class="frieze">
 		<div class="controls">
-			<Choice
-				legend="Time of year"
-				infoTitle="Time of Year"
-				value={season}
-				onChange={(v) => (season = v as SeasonKey)}
-				options={Object.entries(SEASONS).map(([k, v]) => ({ value: k, label: v.label, blurb: v.blurb }))}
-			/>
+			<YearBand bind:segment />
 			<Choice
 				legend="Who is travelling"
 				infoTitle="Who Is Travelling"
@@ -418,7 +415,7 @@
 		<section class="spheres">
 			<h2>Spheres</h2>
 			<p class="spheres-intro">
-				Brackets of one-way travel time, for {season === "sailing" ? "the sailing season" : SEASONS[season].label.toLowerCase()} and {persona.label.toLowerCase()}{back
+				Brackets of one-way travel time, for {SEGMENTS[segment].phrase} and {persona.label.toLowerCase()}{back
 					? ", homeward"
 					: ""}. Marks are coloured on a continuous ramp by days; the brackets are where the list draws its lines.
 			</p>

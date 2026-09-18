@@ -135,6 +135,13 @@
 							"3EX.2"
 						],
 						"notes": "Covers both what the toy is arguing about antiquity and what building it involved, combining devlog and concept framing in one document. Depends on the M2 and M3 implementation tasks finishing first: the build story can't be written until the build is done."
+					},
+					{
+						"id": "3EX.4",
+						"description": "Harden readHash's who/load/tolerance lookups against inherited-key values",
+						"status": "todo",
+						"dependsOn": [],
+						"notes": "readHash validates who, load and tolerance by truthiness against PERSONAS, LOADS and TOLERANCES, so a value like w=constructor passes as valid and crashes downstream (PERSONAS[initial.who].load throws in +page.svelte). Same bug class as the segment param, fixed in readSegment via Object.hasOwn (PR #2, commit 1a10b85). Apply the same guard to the who/load/tolerance lookups in hash-state.ts. Pre-existing on main; not a regression from that PR."
 					}
 				]
 			}
