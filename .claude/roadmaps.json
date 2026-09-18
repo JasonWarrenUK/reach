@@ -116,7 +116,7 @@
 					{
 						"id": "3EX.2",
 						"description": "Implement the year/time control per the spike's recommendation",
-						"status": "todo",
+						"status": "done",
 						"dependsOn": [
 							"3EX.1"
 						],
